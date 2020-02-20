@@ -1,0 +1,2 @@
+class MatchmakeComment < ApplicationRecord
+end

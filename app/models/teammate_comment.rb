@@ -1,0 +1,2 @@
+class TeammateComment < ApplicationRecord
+end

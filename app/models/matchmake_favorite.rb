@@ -1,0 +1,2 @@
+class MatchmakeFavorite < ApplicationRecord
+end
