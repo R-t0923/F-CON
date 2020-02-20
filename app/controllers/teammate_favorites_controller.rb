@@ -1,0 +1,2 @@
+class TeammateFavoritesController < ApplicationController
+end

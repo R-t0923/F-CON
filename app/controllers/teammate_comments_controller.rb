@@ -1,0 +1,2 @@
+class TeammateCommentsController < ApplicationController
+end

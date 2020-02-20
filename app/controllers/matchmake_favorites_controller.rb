@@ -1,0 +1,2 @@
+class MatchmakeFavoritesController < ApplicationController
+end
