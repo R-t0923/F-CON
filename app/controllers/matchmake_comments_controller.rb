@@ -1,0 +1,2 @@
+class MatchmakeCommentsController < ApplicationController
+end

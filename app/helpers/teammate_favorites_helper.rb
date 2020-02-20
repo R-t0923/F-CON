@@ -1,0 +1,2 @@
+module TeammateFavoritesHelper
+end
