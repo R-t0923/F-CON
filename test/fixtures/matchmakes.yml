@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group_id: MyString
+  title: MyString
+  day: 2020-02-20
+  time: 2020-02-20 10:32:16
+  money: MyString
+  place: MyText
+  category: 1
+  capacity: 1
+  level: 1
+  on_recruit: 1
+  introduction: MyText
+
+two:
+  group_id: MyString
+  title: MyString
+  day: 2020-02-20
+  time: 2020-02-20 10:32:16
+  money: MyString
+  place: MyText
+  category: 1
+  capacity: 1
+  level: 1
+  on_recruit: 1
+  introduction: MyText

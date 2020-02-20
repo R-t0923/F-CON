@@ -1,0 +1,2 @@
+class Matchmake < ApplicationRecord
+end
