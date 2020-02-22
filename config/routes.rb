@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     registrations: 'end_users/registrations'
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'homes/top'
-  get 'homes/about'
+  root 'homes#top'
+  get 'about' => 'homes#about', as: 'about'
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy]
