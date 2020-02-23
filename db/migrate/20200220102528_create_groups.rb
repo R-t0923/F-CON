@@ -11,6 +11,7 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.integer :level, null: false
       t.text :introduction, null: false
       t.string :group_image_id
+      t.integer :user_id
 
       t.timestamps
     end

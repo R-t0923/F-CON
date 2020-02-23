@@ -10,22 +10,22 @@
   <div class="row">
     <div class="col-4">
       <table>
-      <tr>
-        <% if @user == current_end_user %>
-        <td>
-          <%= link_to "編集する" , edit_user_path(@user)%>
-        </td>
+      <% if @user == current_end_user %>
+        <tr>
+          <td>
+            <%= link_to "編集する" , edit_user_path(@user)%>
+          </td>
+        </tr>
+          <tr>
+            <td><%= link_to "チーム作成する", new_group_path %></td>
+          </tr>
+          <tr>
+            <td><%= link_to "マッチメイク 検討中"%></td>
+          </tr>
+          <tr>
+            <td><%= link_to "メンバー募集 検討中"%></td>
+          </tr>
         <% end %>
-      </tr>
-        <tr>
-          <td><%= link_to "チーム作成する", "#" %></td>
-        </tr>
-        <tr>
-          <td><%= link_to "マッチメイク 検討中"%></td>
-        </tr>
-        <tr>
-          <td><%= link_to "メンバー募集 検討中"%></td>
-        </tr>
       </table>
     </div>
     <div class="col-4">
