@@ -4,12 +4,14 @@
     <%= attachment_image_tag @user, :user_image, size: "200x200", fallback: "no_image.jpg"%>
   </div>
   <div class="col-6">
+  <%# 入力された段落通りに表示 %>
     <%= simple_format(@user.introduction) %>
   </div>
 </div>
   <div class="row">
     <div class="col-4">
       <table>
+      <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
       <% if @user == current_end_user %>
         <tr>
           <td>
@@ -26,6 +28,7 @@
             <td><%= link_to "メンバー募集 検討中"%></td>
           </tr>
         <% end %>
+        <%# ここまで %>
       </table>
     </div>
     <div class="col-4">

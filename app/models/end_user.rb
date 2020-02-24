@@ -4,15 +4,15 @@ class EndUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-         has_many :grop_users
-  has_many :groups, through: :group_users
+  has_many :grop_users, dependent: :destroy
+  has_many :groups, through: :group_users, dependent: :destroy
 
   attachment :user_image
         
   enum age: {"18歳以下":0, "20代":1, "30代":2, "40代":3, "50代":4, "60歳以上":5}
   enum gender: {"男性":0, "女性":1}
 
-  validates :nick_name, presence: true, length: {maximum: 10 }
+  validates :nick_name, presence: true, length: {maximum: 15 }
   validates :introduction, length: {maximum: 500 }
   #ハイフン込みで電話番号を入力
   validates :phone_number, presence: true, format: { with: /\A\d{3}[-]\d{4}[-]\d{4}\z/ }

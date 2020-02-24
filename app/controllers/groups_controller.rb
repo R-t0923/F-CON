@@ -11,21 +11,30 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     #user_id=グループ作成者と定義
     @group.user_id = current_end_user.id
-    if @group.save!
+    if @group.save
       redirect_to group_path(@group), notice: "チームを作成しました"
     else
-      render new_group_path
+      render :new
     end
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   def update
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
+      redirect_to @group ,notice: "チーム編集が完了しました"
+    else
+      render :edit
+    end
   end
 
   def show
-    @group = Group.find(params[:id])
+    #user_idとend_user.idを結合させている
+  @group = Group.joins("inner join end_users on groups.user_id = end_users.id").select("groups.*,end_users.*").find(params[:id])
+    
   end
 
   def destroy
@@ -36,6 +45,6 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :introduction, :group_image, :user_id)
+    params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :group_introduction, :group_image, :user_id)
   end
 end
