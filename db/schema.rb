@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
     t.integer "female_member", null: false
     t.integer "average_age", null: false
     t.integer "level", null: false
-    t.text "introduction", null: false
+    t.text "group_introduction", null: false
     t.string "group_image_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

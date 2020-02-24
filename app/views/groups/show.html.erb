@@ -1,2 +1,85 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
+<h2>グループ 詳細</h2>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td>
+        <%= attachment_image_tag @group, :group_image, size: "300x250", fallback: "no_image2.jpg"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>チーム作成者：</strong>
+          <%= link_to user_path(@group) do %>
+            <%= @group.nick_name %>
+          <% end %>
+        </td>
+      </tr>
+      <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
+      <% if @group.user_id == current_end_user.id %>
+      <tr>
+        <td>
+          <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
+        </td>
+      </tr>
+      <% end %>
+      <%# ここまで %>
+    </table>
+  </div>
+  <div class="col-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>チーム名</th>
+        <td><%= @group.name %></td>
+      </tr>
+      <tr>
+        <th>活動地域</th>
+        <td><%= @group.city %></td>
+      </tr>
+      <tr>
+        <th>ホームグランド</th>
+        <td><%= @group.place %></td>
+      </tr>
+      <tr>
+        <th>カテゴリー</th>
+        <td><%= @group.category %></td>
+      </tr>
+      <tr>
+        <th>レベル</th>
+        <td><%= @group.level %></td>
+      </tr>
+      <tr>
+        <th>平均年齢</th>
+        <td><%= @group.average_age %>歳</td>
+      </tr>
+        <th>男女比</th>
+        <td>
+          男性<%= @group.male_member %>人 :
+          女性<%= @group.female_member %>人
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-4 offset-1">
+  <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
+    <% if @group.user_id == current_end_user.id %>
+      <table class="table table-borderless">
+        <tr>
+          <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
+        </tr>
+        <tr>
+          <td><%= link_to "新メンバーを募集する", "#",class: "btn btn-success btn-sm btn-block" %></td>
+        </tr>
+      </table>
+    <% end %>
+    <%# ここまで %>
+  </div>
+  <div class="col-6">
+    <table class="table table-bordered">
+      <tr><strong>チーム紹介</strong></tr>
+      <td><%= simple_format(@group.group_introduction) %></td>
+    </table>
+  </div>
+</div>
