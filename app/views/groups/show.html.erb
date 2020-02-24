@@ -8,20 +8,26 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <th>
           <strong>チーム作成者：</strong>
           <%= link_to user_path(@group) do %>
             <%= @group.nick_name %>
           <% end %>
-        </td>
+        </th>
       </tr>
       <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
       <% if @group.user_id == current_end_user.id %>
       <tr>
         <td>
-          <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
+          <%= link_to "編集する",edit_group_path(@group_edit) ,class: "btn btn-primary btn-sm btn-block" %>
         </td>
       </tr>
+      <tr>
+          <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
+        </tr>
+        <tr>
+          <td><%= link_to "新メンバーを募集する", "#",class: "btn btn-success btn-sm btn-block" %></td>
+        </tr>
       <% end %>
       <%# ここまで %>
     </table>
@@ -59,26 +65,9 @@
         </td>
       </tr>
     </table>
-  </div>
-</div>
-<div class="row">
-  <div class="col-4 offset-1">
-  <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
-    <% if @group.user_id == current_end_user.id %>
-      <table class="table table-borderless">
-        <tr>
-          <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
-        </tr>
-        <tr>
-          <td><%= link_to "新メンバーを募集する", "#",class: "btn btn-success btn-sm btn-block" %></td>
-        </tr>
-      </table>
-    <% end %>
-    <%# ここまで %>
-  </div>
-  <div class="col-6">
     <table class="table table-bordered">
       <tr><strong>チーム紹介</strong></tr>
+      <%# 入力された段落通りに表示 %>
       <td><%= simple_format(@group.group_introduction) %></td>
     </table>
   </div>

@@ -1,68 +1,73 @@
 <h2>マイページ</h2>
 <div class="row">
-  <div class="col-4">
-    <%= attachment_image_tag @user, :user_image, size: "200x200", fallback: "no_image.jpg"%>
-  </div>
-  <div class="col-6">
-  <%# 入力された段落通りに表示 %>
-    <%= simple_format(@user.introduction) %>
-  </div>
-</div>
-  <div class="row">
-    <div class="col-4">
-      <table>
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td>
+        <%= attachment_image_tag @user, :user_image, size: "300x250", fallback: "no_image.jpg"%>
+        </td>
+      </tr>
+      
       <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
       <% if @user == current_end_user %>
-        <tr>
-          <td>
-            <%= link_to "編集する" , edit_user_path(@user)%>
-          </td>
-        </tr>
-          <tr>
-            <td><%= link_to "チーム作成する", new_group_path %></td>
-          </tr>
-          <tr>
-            <td><%= link_to "マッチメイク 検討中"%></td>
-          </tr>
-          <tr>
-            <td><%= link_to "メンバー募集 検討中"%></td>
-          </tr>
-        <% end %>
-        <%# ここまで %>
-      </table>
-    </div>
-    <div class="col-4">
-      <table class="table">
-        <tr>
-          <td>名前</td>
-          <td><%= @user.nick_name%></td>
-        </tr>
-        <tr>
-          <td>性別</td>
-          <td><%= @user.gender%></td>
-        </tr>
-        <tr>
-          <td>フットサル経験</td>
-          <td><%= @user.fotsal_experience %>年</td>
-        </tr>
-      </table>
-    </div>
-    <div class="col-4">
-      <table class="table">
-        <tr>
-          <td>所属チーム</td>
-          <td><%= link_to "所属チーム","#" %></td>
-        </tr>
-        <tr>
-          <td>年齢</td>
-          <td><%= @user.age%></td>
-        </tr>
-        <tr>
-          <td>サッカー経験</td>
-          <td><%= @user.soccer_experience %>年</td>
-        </tr>
-      </table>
-    </div>
+      <tr>
+        <td>
+          <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
+        </td>
+      </tr>
+      <tr>
+        <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
+      </tr>
+      <% end %>
+      <%# ここまで %>
+    </table>
+  </div>
+  <div class="col-6">
+    <table class="table table-bordered">
+      <tr>
+        <th>ニックネーム</th>
+        <td><%= @user.nick_name %></td>
+      </tr>
+      <tr>
+        <th>性別</th>
+        <td><%= @user.gender %></td>
+      </tr>
+      <tr>
+        <th>年齢</th>
+        <td><%= @user.age %></td>
+      </tr>
+      <tr>
+        <th>フットサル経験</th>
+        <td><%= @user.fotsal_experience %></td>
+      </tr>
+      <tr>
+        <th>サッカー経験</th>
+        <td><%= @user.soccer_experience %></td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>自己紹介</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@user.introduction) %></td>
+    </table>
   </div>
 </div>
+<div class="row">
+  <div class="col-4 offset-1">
+  <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
+    <% if @user == current_end_user %>
+      <table class="table table-borderless">
+        <tr>
+          <td><%= link_to "マッチメイク 検討中"%></td>
+        </tr>
+        <tr>
+          <td><%= link_to "メンバー募集 検討中"%></td>
+        </tr>
+      </table>
+    <% end %>
+    <%# ここまで %>
+  </div>
+</div>
+
+
 
