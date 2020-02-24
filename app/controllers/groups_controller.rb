@@ -1,4 +1,8 @@
 class GroupsController < ApplicationController
+  # ログイン済ユーザーのみにアクセスを許可する
+  before_action :authenticate_end_user!
+  # ユーザー本人しか下記のアクションを行えないようにする
+  before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     @groups = Group.all
   end
@@ -32,6 +36,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+  @group_edit = Group.find(params[:id])
     #user_idとend_user.idを結合させている
   @group = Group.joins("inner join end_users on groups.user_id = end_users.id").select("groups.*,end_users.*").find(params[:id])
     
@@ -47,4 +52,12 @@ class GroupsController < ApplicationController
   def group_params
     params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :group_introduction, :group_image, :user_id)
   end
+
+  def ensure_correct_user
+    @group = Group.find_by(id: params[:id])
+    if @group.user_id != current_end_user.id
+    redirect_to root_path
+    end
+  end
+
 end
