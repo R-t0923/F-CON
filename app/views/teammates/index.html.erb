@@ -1,2 +1,24 @@
-<h1>Teammates#index</h1>
-<p>Find me in app/views/teammates/index.html.erb</p>
+<h2>メンバー募集一覧</h2>
+<div class ="row">
+  <% @teammates.each do |teammate|%>
+    <div class="col-6">
+      <table class="table table-bordered">
+        <tr>
+          <td width="125">
+            <%= attachment_image_tag teammate.group, :group_image, size: "125x125", fallback: "no_image2.jpg"%>
+          </td>
+          
+            <td>
+              <strong><%= teammate.title%></strong><br>
+          
+            <strong>チーム名　　</strong><%= teammate.group.name %><br>
+            <strong>カテゴリー　</strong><%= teammate.group.category %><br>
+            <strong>募集レベル　</strong><%= teammate.level %><br>
+            <strong>活動地域　　</strong><%= teammate.group.city %><br>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+  <%= paginate @teammate_page, class: "paginate" %>
+</div>

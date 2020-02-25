@@ -19,14 +19,14 @@
       <% if @group.user_id == current_end_user.id %>
       <tr>
         <td>
-          <%= link_to "編集する",edit_group_path(@group_edit) ,class: "btn btn-primary btn-sm btn-block" %>
+          <%= link_to "編集する",edit_group_path(@current_group) ,class: "btn btn-primary btn-sm btn-block" %>
         </td>
       </tr>
       <tr>
           <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
         </tr>
         <tr>
-          <td><%= link_to "新メンバーを募集する", "#",class: "btn btn-success btn-sm btn-block" %></td>
+          <td><%= link_to "新メンバーを募集する", new_group_teammate_path(@current_group),class: "btn btn-success btn-sm btn-block" %></td>
         </tr>
       <% end %>
       <%# ここまで %>

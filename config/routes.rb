@@ -13,16 +13,14 @@ Rails.application.routes.draw do
   get 'about' => 'homes#about', as: 'about'
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
-  resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-
-  resources :matchmakes, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :matchmake_comments, only: [:create, :destroy]
-    resources :matchmake_favorites, only: [:create, :destroy]
+  resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :matchmakes, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :matchmake_comments, only: [:create, :destroy]
+      resources :matchmake_favorites, only: [:create, :destroy]
+    end
+    resources :teammates, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :teammate_comments, only: [:create, :destroy]
+      resources :teammate_favorites, only: [:create, :destroy]
+    end
   end
-
-  resources :teammates, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :teammate_comments, only: [:create, :destroy]
-    resources :teammate_favorites, only: [:create, :destroy]
-  end
-  
 end
