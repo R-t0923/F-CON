@@ -9,7 +9,9 @@
           </td>
           
             <td>
+            <%= link_to teammate_path(teammate.id) do%>
               <strong><%= teammate.title%></strong><br>
+            <% end %>
           
             <strong>チーム名　　</strong><%= teammate.group.name %><br>
             <strong>カテゴリー　</strong><%= teammate.group.category %><br>
