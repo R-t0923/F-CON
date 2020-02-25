@@ -38,8 +38,7 @@ class GroupsController < ApplicationController
   def show
   @current_group = Group.find(params[:id])
     #user_idとend_user.idを結合させている
-  @group = Group.joins("inner join end_users on groups.user_id = end_users.id").select("groups.*,end_users.*").find(params[:id])
-    
+  @group = Group.joins("inner join end_users on groups.user_id = end_users.id").select("groups.*,end_users.*").find(params[:id])    
   end
 
   def destroy

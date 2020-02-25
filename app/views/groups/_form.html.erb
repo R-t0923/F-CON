@@ -3,13 +3,13 @@
     <div class="col-8 offset-2">
       <table class="table">
         <tr>
-          <th width="160">チーム名</th>
+          <th width="190">チーム名　　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.text_field :name, placeholder:"チームFCON(20文字以内)",size: 45 %>
           </td>
         </tr>
         <tr>
-        <th>地域</th>
+        <th>地域　　　　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.select :city, Group.cities.keys.to_a, {}  %>
           </td>
@@ -21,26 +21,26 @@
           </td>
         </tr>
         <tr>
-        <th>カテゴリー</th>
+        <th>カテゴリー　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.select :category, Group.categories.keys.to_a, {}  %>
           </td>
         </tr>
         <tr>
-        <th>レベル</th>
+        <th>レベル　　　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.select :level, Group.levels.keys.to_a, {}  %>
           </td>
         </tr>
         <tr>
-        <th>男女比</th>
+        <th>男女比　　　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             男性<%= f.number_field :male_member, min: 0 ,max:99%>人<span>　</span>
             女性<%= f.number_field :female_member, min: 0 ,max:99%>人
           </td>
         </tr>
         <tr>
-        <th>平均年齢</th>
+        <th>平均年齢　　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.number_field :average_age, min: 0 ,max:99%>歳
           </td>
@@ -50,7 +50,7 @@
           <%= f.attachment_field :group_image, placeholder: "画像選択" %>
         </td>
         <tr>
-          <th>チーム紹介</th>
+          <th>チーム紹介　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.text_area :group_introduction, placeholder:"こんにちは！！" ,size: "45*100"%>
           </td>

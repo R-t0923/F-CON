@@ -8,12 +8,12 @@
         </td>
       </tr>
       <tr>
-        <th>
+        <td>
           <strong>チーム作成者：</strong>
           <%= link_to user_path(@group) do %>
             <%= @group.nick_name %>
           <% end %>
-        </th>
+        </td>
       </tr>
       <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
       <% if @group.user_id == current_end_user.id %>

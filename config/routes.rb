@@ -23,4 +23,6 @@ Rails.application.routes.draw do
       resources :teammate_favorites, only: [:create, :destroy]
     end
   end
+  resources :teammates, only: [:index, :show]
+  resources :matchmakes, only: [:index, :show]
 end

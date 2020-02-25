@@ -1,4 +1,4 @@
-<h2>メンバー募集投稿の作成</h2>
+<h2>メンバー募集の作成</h2>
 <%= form_for @teammate, url:group_teammates_path do |f| %>
   <div class="row">
     <div class="col-8 offset-2">
@@ -10,13 +10,13 @@
           </td>
         </tr>
         <tr>
-          <th>募集レベル　 <span class="badge badge-danger">必須</span></th>
+          <th>募集メンバー <span class="badge badge-danger">必須</span></th>
           <td>
             <%= f.select :level, Teammate.levels.keys.to_a, {}  %>
           </td>
         </tr>
         <tr>
-          <th>活動日時　　 <span class="badge badge-danger ">必須</span></th>
+          <th>活動日　　　 <span class="badge badge-danger ">必須</span></th>
           <td>
             <%= f.text_field :schedule, placeholder:"例, 毎週土曜日　14時〜16時（変動あり）",size: 50 %>
           </td>
