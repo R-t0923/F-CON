@@ -1,10 +1,11 @@
 class TeammatesController < ApplicationController
   def index
+    @teammates = Teammate.all
+    @teammate_page = Teammate.page(params[:page]).per(8) 
   end
 
   def new
     @teammate = Teammate.new
-    
   end
 
   def create
@@ -25,6 +26,7 @@ class TeammatesController < ApplicationController
   end
  
   def show
+    @teammate = Teammate.find([:id])
   end
 
   def destroy
