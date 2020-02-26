@@ -17,12 +17,17 @@
       </tr>
       <%# group作成者のuser_idとログインユーザーidが一緒なら表示 %>
       <% if @group.user_id == current_end_user.id %>
-      <tr>
-        <td>
-          <%= link_to "編集する",edit_group_path(@current_group) ,class: "btn btn-primary btn-sm btn-block" %>
-        </td>
-      </tr>
-      <tr>
+        <tr>
+          <td>
+            <%= link_to "編集する",edit_group_path(@current_group) ,class: "btn btn-primary btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
           <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
         </tr>
         <tr>

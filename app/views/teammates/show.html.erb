@@ -10,19 +10,24 @@
       <tr>
         <td>
           <strong>チーム名：</strong>
-          <%#= link_to group_path(@group) do %>
+          <%= link_to group_path(@teammate) do %>
             <%= @teammate.group.name %>
-          <%# end %>
+          <% end %>
         </td>
       </tr>
       <%# group_idとgroup.idが一緒なら表示 %>
-      <%# if @teammate.group_id == group.id %>
+      <% if @teammate.user_id == current_end_user.id %>
       <tr>
         <td>
           <%= link_to "編集する",edit_group_teammate_path(@teammate) ,class: "btn btn-primary btn-sm btn-block" %>
         </td>
       </tr>
-     <%# end %>
+      <tr>
+        <td>
+          <%= link_to "投稿を削除する", group_teammate_path(@teammate), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+        </td>
+      </tr>
+    <% end %>
       <%# ここまで %>
     </table>
   </div>

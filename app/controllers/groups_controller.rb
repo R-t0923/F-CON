@@ -4,7 +4,10 @@ class GroupsController < ApplicationController
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
-    @groups = Group.all
+    # 新しい順に上から表示（降順）
+    @groups = Group.all.order(created_at: :desc)
+    # ８投稿毎にページをかえる
+    @group_page = Group.page(params[:page]).per(8) 
   end
 
   def new
@@ -37,7 +40,7 @@ class GroupsController < ApplicationController
 
   def show
   @current_group = Group.find(params[:id])
-    #user_idとend_user.idを結合させている
+    #user_idとend_user.idをSQLで結合させている
   @group = Group.joins("inner join end_users on groups.user_id = end_users.id").select("groups.*,end_users.*").find(params[:id])    
   end
 
