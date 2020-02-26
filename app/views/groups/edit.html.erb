@@ -1,14 +1,2 @@
 <h2>チーム編集</h2>
 <%= render "form" ,group: @group%>
-<div class ="row">
-  <div class="col-8 offset-2">
-    <table class="table table-borderless">
-    <tr>
-      <th width="190"></th>
-      <td>
-        <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm w-75" %>
-      </td>
-    </tr>
-    </table>
-  </div>
-</div>

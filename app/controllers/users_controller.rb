@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
-    @users = EndUser.all
-    # 新しい会員順で、８人毎にページをかえる
+    # 新しい順に上から表示（降順）
+    @users = EndUser.all.order(created_at: :desc)
+    # ８人毎にページをかえる
     @user_page = EndUser.page(params[:page]).per(8) 
   end
 
