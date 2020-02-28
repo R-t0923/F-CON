@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_140208) do
+ActiveRecord::Schema.define(version: 2020_02_27_122122) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
     t.text "introduction"
     t.string "user_image_id"
     t.datetime "deleted_at"
+    t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_end_users_on_deleted_at"
@@ -46,9 +47,9 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
     t.index ["reset_password_token"], name: "index_end_users_on_reset_password_token", unique: true
   end
 
-  create_table "grop_users", force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "group_id", null: false
+  create_table "group_users", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "end_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
     t.integer "level", null: false
     t.text "group_introduction", null: false
     t.string "group_image_id"
-    t.integer "user_id"
+    t.integer "end_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,7 +76,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
   end
 
   create_table "matchmake_comments", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "end_user_id", null: false
     t.integer "matchmake_id", null: false
     t.text "comment", null: false
     t.datetime "created_at", null: false
@@ -83,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
   end
 
   create_table "matchmake_favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "end_user_id", null: false
     t.integer "matchmake_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -106,7 +107,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
   end
 
   create_table "teammate_comments", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "end_user_id", null: false
     t.integer "teammate_id", null: false
     t.text "comment", null: false
     t.datetime "created_at", null: false
@@ -114,7 +115,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_140208) do
   end
 
   create_table "teammate_favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "end_user_id", null: false
     t.integer "teammate_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
