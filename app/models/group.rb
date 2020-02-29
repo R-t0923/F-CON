@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
-  has_many :group_users, dependent: :destroy
-  has_many :end_users, through: :group_users, dependent: :destroy
-  has_many :teammates, dependent: :destroy
+  has_many :group_users
+  has_many :end_users, through: :group_users
+  has_many :teammates
   
   belongs_to :end_user
   
