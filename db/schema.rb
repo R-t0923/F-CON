@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_122122) do
+ActiveRecord::Schema.define(version: 2020_02_29_102023) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,10 +48,12 @@ ActiveRecord::Schema.define(version: 2020_02_27_122122) do
   end
 
   create_table "group_users", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "end_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "end_user_id"
+    t.integer "group_id"
+    t.index ["end_user_id"], name: "index_group_users_on_end_user_id"
+    t.index ["group_id"], name: "index_group_users_on_group_id"
   end
 
   create_table "groups", force: :cascade do |t|

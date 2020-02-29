@@ -10,8 +10,8 @@
       <tr>
         <td>
           <strong>チーム作成者：</strong>
-          <%= link_to user_path(@group) do %>
-            <%= @group.nick_name %>
+          <%= link_to user_path(@group.end_user) do %>
+            <%= @group.end_user.nick_name %>
           <% end %>
         </td>
       </tr>
@@ -19,7 +19,7 @@
       <% if @group.end_user_id == current_end_user.id %>
         <tr>
           <td>
-            <%= link_to "編集する",edit_group_path(@current_group) ,class: "btn btn-primary btn-sm btn-block" %>
+            <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
           </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
           <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
         </tr>
         <tr>
-          <td><%= link_to "新メンバーを募集する", new_group_teammate_path(@current_group),class: "btn btn-success btn-sm btn-block" %></td>
+          <td><%= link_to "新メンバーを募集する", new_group_teammate_path(@group),class: "btn btn-success btn-sm btn-block" %></td>
         </tr>
       <% end %>
       <%# ここまで %>

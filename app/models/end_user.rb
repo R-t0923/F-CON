@@ -6,8 +6,10 @@ class EndUser < ApplicationRecord
   
   has_many :grop_users, dependent: :destroy
   has_many :groups, through: :group_users, dependent: :destroy
-
+  #has_many :teammates, dependent: :destroy
+  has_many :teammate_comments, dependent: :destroy
   attachment :user_image
+  
         
   enum age: {"18歳以下":0, "20代":1, "30代":2, "40代":3, "50代":4, "60歳以上":5}
   enum gender: {"男性":0, "女性":1}

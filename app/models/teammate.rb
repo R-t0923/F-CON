@@ -1,5 +1,6 @@
 class Teammate < ApplicationRecord
   belongs_to :group
+  has_many :teammate_comments, dependent: :destroy
 
   enum level: {"誰でもOK！！":0,"男性のみ":1, "女性のみ":2, "経験者":3, "20代のみ":4,"30代のみ":5, "40代のみ":6, "50代のみ":7, "60歳以上歓迎":8 }
 

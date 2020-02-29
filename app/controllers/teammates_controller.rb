@@ -4,10 +4,8 @@ class TeammatesController < ApplicationController
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
-    # 新しい順に上から表示（降順）
-    @teammates = Teammate.all.order(created_at: :desc)
-    # ８投稿毎にページをかえる
-    @teammate_page = Teammate.page(params[:page]).per(8) 
+    # 新しい順に上から表示（降順）,８投稿毎にページをかえる
+    @teammates = Teammate.all.order(created_at: :desc).page(params[:page]).per(8) 
   end
 
   def new
@@ -39,8 +37,10 @@ class TeammatesController < ApplicationController
   end
  
   def show
-    # group_idとgroup.idをSQLで結合させる
-    @teammate = Teammate.joins("inner join groups on teammates.group_id = groups.id").select("teammates.*,groups.*").find(params[:id])
+    @teammate = Teammate.find(params[:id])
+    @teammate_comment = TeammateComment.new
+    @teammate_comments = @teammate.teammate_comments.page(params[:page]).per(5) 
+    # @teammate_comments = [1,2,3,4]
   end
 
   def destroy
@@ -55,7 +55,7 @@ class TeammatesController < ApplicationController
   end
 
   def ensure_correct_user
-    @group = Group.find_by(id: params[:id])
+    @group = Group.find_by(id: params[:group_id])
     if @group.end_user_id != current_end_user.id
     redirect_to root_path
     end

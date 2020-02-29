@@ -10,25 +10,33 @@
       <tr>
         <td>
           <strong>チーム名：</strong>
-          <%= link_to group_path(@teammate) do %>
+          <%= link_to group_path(@teammate.group.id) do %>
             <%= @teammate.group.name %>
           <% end %>
         </td>
       </tr>
       <%# group_idとgroup.idが一緒なら表示 %>
-      <% if @teammate.end_user_id == current_end_user.id %>
+      <% if @teammate.group.end_user_id == current_end_user.id %>
       <tr>
         <td>
-          <%= link_to "編集する",edit_group_teammate_path(@teammate) ,class: "btn btn-primary btn-sm btn-block" %>
+          <%= link_to "編集する",edit_group_teammate_path(@teammate.group,@teammate) ,class: "btn btn-primary btn-sm btn-block" %>
         </td>
       </tr>
       <tr>
         <td>
-          <%= link_to "投稿を削除する", group_teammate_path(@teammate), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          <%= link_to "投稿を削除する", group_teammate_path(@teammate.group,@teammate), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
         </td>
       </tr>
     <% end %>
       <%# ここまで %>
+      <tr>
+        <td>
+          <%= form_for [@teammate, @teammate_comment] do |f| %>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+            <%= f.submit "送信する", class: "btn btn-sm" %>
+          <% end %>
+        </td>
+      <tr>
     </table>
   </div>
   <div class="col-6">
@@ -73,5 +81,40 @@
   </div>
 </div>
 
-      
-    
+<div class="row">
+	<h2>コメント一覧</h2>
+	<div class ="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿者</th>
+          <th>コメント</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @teammate_comments.each do |teammate_comment| %>
+          <tr>
+            <td width="160">
+              <%= teammate_comment.end_user.nick_name %>
+            </td>
+            <td width="250">
+              <%= simple_format(teammate_comment.comment) %>
+            </td>
+            <td width="160">
+              <%= teammate_comment.created_at.strftime("%Y年%m月%d日") %>
+              </td>
+            <td width="135">
+              <% if teammate_comment.end_user == current_end_user %>
+              <%# teammateのidとcommentのidを両方渡している。 %>
+                <%= link_to "コメントを消す", teammate_teammate_comment_path(@teammate,teammate_comment.id), method: :delete, class:"btn-sm btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @teammate_comments, class: "paginate" %>
+  </div>
+</div>
