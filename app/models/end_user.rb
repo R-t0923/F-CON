@@ -4,7 +4,7 @@ class EndUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :grop_users
+  has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   #has_many :teammates, dependent: :destroy
   has_many :teammate_comments

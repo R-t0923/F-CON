@@ -31,6 +31,8 @@ class UsersController < ApplicationController
   def destroy
     user = EndUser.find(params[:id])
     user.destroy
+    group = Group.where(end_user_id: user.id)
+    group.destroy_all
     redirect_to root_path
   end
 
