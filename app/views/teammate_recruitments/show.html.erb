@@ -17,30 +17,49 @@
       </tr>
       <%# group_idとgroup.idが一緒なら表示 %>
       <% if @teammate_recruitment.group.end_user_id == current_end_user.id %>
-      <tr>
-        <td>
-          <%= link_to "編集する",edit_group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) ,class: "btn btn-primary btn-sm btn-block" %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <%= link_to "投稿を削除する", group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-        </td>
-      </tr>
-    <% end %>
+        <tr>
+          <td>
+            <%= link_to "編集する",edit_group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) ,class: "btn btn-primary btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "投稿を削除する", group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          </td>
+        </tr>
+      <% end %>
       <%# ここまで %>
       <tr>
         <td>
+
+        <%# コメント機能 %>
           <%= form_for [@teammate_recruitment, @comment] do |f| %>
             <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
             <%= f.submit "送信する", class: "btn btn-sm" %>
           <% end %>
+        <%# コメント機能　ここまで %>
+
         </td>
       <tr>
     </table>
   </div>
   <div class="col-6">
   <span>投稿日： <%= @teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></span>
+
+  <%# いいね機能 %>
+  <% if @teammate_recruitment.favorited_by?(current_end_user) %>
+      <%= link_to  teammate_recruitment_teammate_favorites_path(@teammate_recruitment), method: :delete do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
+        <%= "お気に入りを削除" %>
+      <% end %>
+  <% else %>
+      <%= link_to teammate_recruitment_teammate_favorites_path(@teammate_recruitment), method: :post do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
+        <%= "お気に入りに追加" %> 
+      <% end %>
+  <% end %>
+  <%# いいね機能ここまで %>
+
   <h4><%= @teammate_recruitment.title%></h4>
     <table class="table table-bordered">
         <th>募集メンバー</th>
@@ -118,3 +137,9 @@
     <%= paginate @comments, class: "paginate" %>
   </div>
 </div>
+
+
+
+
+
+						

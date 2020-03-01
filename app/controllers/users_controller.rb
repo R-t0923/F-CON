@@ -4,10 +4,8 @@ class UsersController < ApplicationController
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
-    # 新しい順に上から表示（降順）
-    @users = EndUser.all.order(created_at: :desc)
-    # ８人毎にページをかえる
-    @users = EndUser.page(params[:page]).per(8) 
+    # 新しい順に上から表示（降順）８人毎にページをかえる
+    @users = EndUser.all.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def show
@@ -31,6 +29,7 @@ class UsersController < ApplicationController
   def destroy
     user = EndUser.find(params[:id])
     user.destroy
+    # グループ作成者が退会した場合は、グループに紐づくデータ（グループ参加者や投稿を全て削除
     group = Group.where(end_user_id: user.id)
     group.destroy_all
     redirect_to root_path
