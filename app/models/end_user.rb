@@ -6,7 +6,8 @@ class EndUser < ApplicationRecord
   
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
-  has_many :teammate_comments
+  has_many :teammate_comments, dependent: :destroy
+  has_many :teammate_favorites, dependent: :destroy
   attachment :user_image
   
         

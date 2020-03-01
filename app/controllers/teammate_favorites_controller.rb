@@ -1,4 +1,8 @@
 class TeammateFavoritesController < ApplicationController
+  before_action :authenticate_end_user!
+  def index
+    @favorites = TeammateFavorite.where(end_user_id: current_end_user.id)
+  end
   def create
     teammate_recruitment =TeammateRecruitment.find(params[:teammate_recruitment_id])
     favorite = current_end_user.teammate_favorites.new(teammate_recruitment_id: teammate_recruitment.id)
@@ -12,3 +16,5 @@ class TeammateFavoritesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 end
+
+

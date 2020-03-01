@@ -12,17 +12,21 @@ Rails.application.routes.draw do
   root 'homes#top'
   get 'about' => 'homes#about', as: 'about'
 
-  resources :users, only: [:index, :show, :edit, :update, :destroy]
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
+    resources :teammate_favorites, only: [:index]
+    resources :matchmake_favorites, only: [:index]
+  end
   resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :matchmakes, only: [:new, :create, :edit, :update, :destroy] 
     resources :teammate_recruitments, only: [:new, :create, :edit, :update, :destroy] 
   end
   resources :teammate_recruitments, only: [:index, :show] do
     resources :teammate_comments, only: [:create, :destroy]
-    resources :teammate_favorites, only: [:create, :destroy]
+    resource :teammate_favorites, only: [:create, :destroy]
   end
   resources :matchmakes, only: [:index, :show] do
     resources :matchmake_comments, only: [:create, :destroy]
-    resources :matchmake_favorites, only: [:create, :destroy]
+    resource :matchmake_favorites, only: [:create, :destroy]
   end
+  
 end

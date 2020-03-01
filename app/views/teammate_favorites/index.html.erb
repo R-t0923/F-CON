@@ -1,0 +1,27 @@
+<h2>メンバー募集お気に入り一覧</h2>
+<div class="row">
+  <div class="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿タイトル</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @favorites.each do |favorite| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= favorite.teammate_recruitment.title %>
+            </td>
+            <td><%= favorite.teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></td>
+            <td>
+              <%= link_to "詳細へ", teammate_recruitment_path(favorite.teammate_recruitment_id) %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
