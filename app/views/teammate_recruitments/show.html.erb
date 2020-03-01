@@ -1,0 +1,120 @@
+<h2>メンバー募集 詳細</h2>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td>
+    <%= attachment_image_tag @teammate_recruitment.group, :group_image, size: "300x250", fallback: "no_image2.jpg"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>チーム名：</strong>
+          <%= link_to group_path(@teammate_recruitment.group.id) do %>
+            <%= @teammate_recruitment.group.name %>
+          <% end %>
+        </td>
+      </tr>
+      <%# group_idとgroup.idが一緒なら表示 %>
+      <% if @teammate_recruitment.group.end_user_id == current_end_user.id %>
+      <tr>
+        <td>
+          <%= link_to "編集する",edit_group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) ,class: "btn btn-primary btn-sm btn-block" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to "投稿を削除する", group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+        </td>
+      </tr>
+    <% end %>
+      <%# ここまで %>
+      <tr>
+        <td>
+          <%= form_for [@teammate_recruitment, @comment] do |f| %>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+            <%= f.submit "送信する", class: "btn btn-sm" %>
+          <% end %>
+        </td>
+      <tr>
+    </table>
+  </div>
+  <div class="col-6">
+  <span>投稿日： <%= @teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></span>
+  <h4><%= @teammate_recruitment.title%></h4>
+    <table class="table table-bordered">
+        <th>募集メンバー</th>
+        <td><%= @teammate_recruitment.level %></td>
+      </tr>
+      <tr>
+        <th>カテゴリー</th>
+        <td><%= @teammate_recruitment.group.category %></td>
+      </tr>
+      <tr>
+        <th>チームレベル</th>
+        <td><%= @teammate_recruitment.group.level %></td>
+      </tr>
+      <tr>
+        <th>男女比</th>
+        <td>
+          男性<%= @teammate_recruitment.group.male_member %>人 :
+          女性<%= @teammate_recruitment.group.female_member %>人
+        </td>
+      </tr>
+      <tr>
+        <th>活動地域</th>
+        <td><%= @teammate_recruitment.group.city %></td>
+      </tr>
+      <tr>
+        <th>活動日</th>
+        <td><%= @teammate_recruitment.schedule %></td>
+      </tr>
+      <tr>
+        <th>参加費</th>
+        <td><%= @teammate_recruitment.money %></td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>募集内容</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@teammate_recruitment.introduction) %></td>    </table>
+  </div>
+</div>
+
+<div class="row">
+	<h2>コメント一覧</h2>
+	<div class ="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿者</th>
+          <th>コメント</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td width="160">
+              <%= comment.end_user.nick_name %>
+            </td>
+            <td width="250">
+              <%= simple_format(comment.comment) %>
+            </td>
+            <td width="160">
+              <%= comment.created_at.strftime("%Y年%m月%d日") %>
+              </td>
+            <td width="135">
+              <% if comment.end_user == current_end_user %>
+              <%# teammate_recruitmentのidとcommentのidを両方渡している。 %>
+                <%= link_to "コメントを消す", teammate_recruitment_teammate_comment_path(@teammate_recruitment,comment.id), method: :delete, class:"btn-sm btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @comments, class: "paginate" %>
+  </div>
+</div>

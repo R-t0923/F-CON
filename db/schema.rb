@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_102023) do
+ActiveRecord::Schema.define(version: 2020_02_29_124712) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_102023) do
 
   create_table "teammate_comments", force: :cascade do |t|
     t.integer "end_user_id", null: false
-    t.integer "teammate_id", null: false
+    t.integer "teammate_recruitment_id", null: false
     t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -118,12 +118,12 @@ ActiveRecord::Schema.define(version: 2020_02_29_102023) do
 
   create_table "teammate_favorites", force: :cascade do |t|
     t.integer "end_user_id", null: false
-    t.integer "teammate_id", null: false
+    t.integer "teammate_recruitment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "teammates", force: :cascade do |t|
+  create_table "teammate_recruitments", force: :cascade do |t|
     t.integer "group_id", null: false
     t.text "schedule", null: false
     t.string "title", null: false

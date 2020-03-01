@@ -1,0 +1,26 @@
+<h2>メンバー募集一覧</h2>
+<div class ="row">
+  <% @teammate_recruitments.each do |teammate_recruitment|%>
+    <div class="col-6">
+      <table class="table table-bordered">
+        <tr>
+          <td width="125">
+            <%= attachment_image_tag teammate_recruitment.group, :group_image, size: "125x125", fallback: "no_image2.jpg"%>
+          </td>
+          
+          <td>
+            <%= link_to teammate_recruitment_path(teammate_recruitment.id) do%>
+              <strong><%= teammate_recruitment.title%></strong><br>
+            <% end %>
+          
+            <strong>チーム名　　</strong><%= teammate_recruitment.group.name %><br>
+            <strong>カテゴリー　</strong><%= teammate_recruitment.group.category %><br>
+            <strong>募集レベル　</strong><%= teammate_recruitment.level %><br>
+            <strong>活動地域　　</strong><%= teammate_recruitment.group.city %><br>
+          </td>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+  <%= paginate @teammate_recruitments, class: "paginate" %>
+</div>

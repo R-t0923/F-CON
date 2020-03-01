@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :matchmakes, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
-    resources :teammates, only: [:index, :show, :new, :create, :edit, :update, :destroy] 
+    resources :matchmakes, only: [:new, :create, :edit, :update, :destroy] 
+    resources :teammate_recruitments, only: [:new, :create, :edit, :update, :destroy] 
   end
-  resources :teammates, only: [:index, :show] do
+  resources :teammate_recruitments, only: [:index, :show] do
     resources :teammate_comments, only: [:create, :destroy]
     resources :teammate_favorites, only: [:create, :destroy]
   end
