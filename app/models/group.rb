@@ -1,7 +1,10 @@
 class Group < ApplicationRecord
   has_many :group_users, dependent: :destroy
-  has_many :end_users, through: :group_users, dependent: :destroy
-  has_many :teammates, dependent: :destroy
+  has_many :end_users, through: :group_users
+  has_many :teammate_recruitments, dependent: :destroy
+  has_many :matchmakes, dependent: :destroy
+  
+  belongs_to :end_user
   
   # rifileで画像を登録できるようにするための記述
   attachment :group_image

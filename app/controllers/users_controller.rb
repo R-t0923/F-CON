@@ -7,11 +7,12 @@ class UsersController < ApplicationController
     # 新しい順に上から表示（降順）
     @users = EndUser.all.order(created_at: :desc)
     # ８人毎にページをかえる
-    @user_page = EndUser.page(params[:page]).per(8) 
+    @users = EndUser.page(params[:page]).per(8) 
   end
 
   def show
     @user = EndUser.find(params[:id])
+    @groups = Group.where(end_user_id: @user.id).page(params[:page]).per(2) 
   end
 
   def edit
@@ -30,6 +31,8 @@ class UsersController < ApplicationController
   def destroy
     user = EndUser.find(params[:id])
     user.destroy
+    group = Group.where(end_user_id: user.id)
+    group.destroy_all
     redirect_to root_path
   end
 

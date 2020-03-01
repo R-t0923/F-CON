@@ -1,0 +1,5 @@
+<h2>メンバー募集の編集</h2>
+<%= form_for @teammate_recruitment, url:group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) do |f| %>
+  <% render "teammate_form", f: f %>
+<% end %>
+

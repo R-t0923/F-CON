@@ -55,6 +55,18 @@
       <%# 入力された段落通りに表示 %>
       <td><%= simple_format(@user.introduction) %></td>
     </table>
+    <table class="table">
+      <tr><strong><%= @user.nick_name %>のチーム一覧</strong></tr>
+      <% @groups.each do |group|%>
+        <tr> 
+          <td><%= group.name %></td>
+          <td>
+            <%= link_to "チーム詳細へ", group_path(group.id) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @groups, class: "paginate" %>
   </div>
 </div>
 <div class="row">
