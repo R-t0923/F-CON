@@ -12,6 +12,19 @@ class Group < ApplicationRecord
   enum category: {"男性":0, "女性":1, "ミックス":2, "オーバー30":3, "オーバー40":4}
   enum level: {"超初級ーウルトラビギナー":0, "初級－スーパービギナー":1, "中級－ビギナー":2, "上級－エンジョイ":3}
 
+  # チーム名による絞り込み
+  scope :get_by_name, ->(name) {
+  where("name like ?", "%#{name}%")
+  }
+  # 活動地域による絞り込み
+  scope :get_by_city, ->(city) {
+  where(city: city)
+  }
+  # カテゴリーによる絞り込み
+  scope :get_by_category, ->(category) {
+    where(category: category)
+  }
+
   validates :name, presence: true, length: {maximum: 20 }
   validates :group_introduction, presence: true,length: {maximum: 1000 }
   validates :city, presence: true

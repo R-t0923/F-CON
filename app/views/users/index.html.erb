@@ -1,4 +1,28 @@
 <h2>会員一覧</h2>
+<%#　絞り込み機能%>
+<div class="row">
+  <div class = "col-4">
+    <%= form_tag(users_path, method: "get") do %>
+      <table class="table table-borderless"> 
+          <tr>
+            <td>
+              <strong>ニックネーム</strong><br>
+              <span>
+                <%= text_field_tag :nick_name, params[:nick_name],size: 35 %>
+              </span>
+            </td>
+            <td><strong>年齢</strong><br>
+              <span>
+                <%= select_tag :age, options_for_select(EndUser.ages), include_blank: true %>
+              </span>
+            </td>
+            <td><br><span><%= submit_tag "検索" %></span></td>
+          </tr>
+      </table>
+    <% end %>
+  </div>
+</div>
+<%# 絞り込み機能ここまで%>
 <div class="row">
   <div class="col-10 offset-1">
     <table class="table">

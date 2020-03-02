@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
-  # ログイン済ユーザーのみにアクセスを許可する
-  before_action :authenticate_end_user!
+  before_action :authenticate_end_user!,except: [:index, :show]
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）８人毎にページをかえる
     @users = EndUser.all.order(created_at: :desc).page(params[:page]).per(8)
+    # モデルに定義した絞り込み検索の記述を呼び出す
+    if params[:nick_name].present?
+    @users = @users.get_by_nick_name params[:nick_name]
+    end
+    if params[:age].present?
+    @users = @users.get_by_age params[:age]
+    end
   end
 
   def show

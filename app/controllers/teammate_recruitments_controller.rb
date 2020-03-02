@@ -1,11 +1,23 @@
 class TeammateRecruitmentsController < ApplicationController
-  # ログイン済ユーザーのみにアクセスを許可する
-  before_action :authenticate_end_user!
+  before_action :authenticate_end_user!,except: [:index, :show]
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）,８投稿毎にページをかえる
     @teammate_recruitments = TeammateRecruitment.all.order(created_at: :desc).page(params[:page]).per(8) 
+    # モデルに定義した絞り込み検索の記述を呼び出す
+    if params[:name].present?
+    @teammate_recruitments = @teammate_recruitments.get_by_name params[:name]
+    end
+    if params[:city].present?
+    @teammate_recruitments = @teammate_recruitments.get_by_city params[:city]
+    end
+    if params[:category].present?
+    @teammate_recruitments = @teammate_recruitments.get_by_category params[:category]
+    end
+    if params[:level].present?
+    @teammate_recruitments = @teammate_recruitments.get_by_level params[:level]
+    end
   end
 
   def new
