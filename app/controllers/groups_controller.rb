@@ -55,6 +55,16 @@ class GroupsController < ApplicationController
     redirect_to root_path
   end
 
+  def matchmake_index 
+    @group = Group.find_by(end_user_id: current_end_user.id)
+    @matchmakes = Matchmake.where(group_id: @group)
+  end
+
+  def teammate_recruitment_index
+    @group = Group.find_by(end_user_id: current_end_user.id)
+    @teammate_recruitments = TeammateRecruitment.where(group_id: @group)
+  end
+
   private
   def group_params
     params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :group_introduction, :group_image, :end_user_id)

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :matchmake_favorites, only: [:index]
   end
   resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    get 'matchmake_index' => 'groups#matchmake_index'
+    get 'teammate_recruitment_index' => 'groups#teammate_recruitment_index'
     resources :matchmakes, only: [:new, :create, :edit, :update, :destroy] 
     resources :teammate_recruitments, only: [:new, :create, :edit, :update, :destroy] 
   end
