@@ -1,2 +1,144 @@
-<h1>Matchmakes#show</h1>
-<p>Find me in app/views/matchmakes/show.html.erb</p>
+<h2>マッチメイク募集 詳細</h2>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td>
+    <%= attachment_image_tag @matchmake.group, :group_image, size: "300x250", fallback: "no_image2.jpg"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>チーム名：</strong>
+          <%= link_to group_path(@matchmake.group.id) do %>
+            <%= @matchmake.group.name %>
+          <% end %>
+        </td>
+      </tr>
+      <%# group_idとgroup.idが一緒なら表示 %>
+      <% if @matchmake.group.end_user_id == current_end_user.id || current_end_user.admin? %>
+        <tr>
+          <td>
+            <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-primary btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          </td>
+        </tr>
+      <% end %>
+      <%# ここまで %>
+      <tr>
+        <td>
+
+        <%# コメント機能 %>
+          <%= form_for [@matchmake, @comment] do |f| %>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+            <%= f.submit "送信する", class: "btn btn-sm" %>
+          <% end %>
+        <%# コメント機能　ここまで %>
+
+        </td>
+      <tr>
+    </table>
+  </div>
+  <div class="col-6">
+  <span>投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %></span>
+
+  <%# いいね機能 %>
+  <% if @matchmake.favorited_by?(current_end_user) %>
+      <%= link_to  matchmake_matchmake_favorites_path(@matchmake), method: :delete do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
+        <%= "お気に入りを削除" %>
+      <% end %>
+  <% else %>
+      <%= link_to matchmake_matchmake_favorites_path(@matchmake), method: :post do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
+        <%= "お気に入りに追加" %> 
+      <% end %>
+  <% end %>
+  <%# いいね機能ここまで %>
+
+  <h4><%= @matchmake.title%></h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>募集日程</th>
+        <td>
+          <%= @matchmake.day.strftime("%Y年%m月%d日") %> 
+          <%= @matchmake.time.strftime("%H時%M分〜") %>
+        </td>
+      </tr>
+      <tr>
+        <th>募集メンバー</th>
+        <td><%= @matchmake.level %></td>
+      </tr>
+      <tr>
+        <th>募集カテゴリー</th>
+        <td><%= @matchmake.category %></td>
+      </tr>
+      <tr>
+        <th>募集数</th>
+        <td><%= @matchmake.capacity %>チーム</td>
+      </tr>
+      
+      <tr>
+        <th>開催場所</th>
+        <td><%= @matchmake.place %></td>
+      </tr>
+      
+      <tr>
+        <th>参加費</th>
+        <td><%= @matchmake.money %></td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>募集内容</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@matchmake.introduction) %></td>    </table>
+  </div>
+</div>
+
+<div class="row">
+	<h2>コメント一覧</h2>
+	<div class ="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿者</th>
+          <th>コメント</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td width="160">
+              <%= comment.end_user.nick_name %>
+            </td>
+            <td width="250">
+              <%= simple_format(comment.comment) %>
+            </td>
+            <td width="160">
+              <%= comment.created_at.strftime("%Y年%m月%d日") %>
+              </td>
+            <td width="135">
+              <% if comment.end_user == current_end_user %>
+              <%# matchmakeのidとcommentのidを両方渡している。 %>
+                <%= link_to "コメントを消す", matchmake_matchmake_comment_path(@matchmake,comment.id), method: :delete, class:"btn-sm btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @comments, class: "paginate" %>
+  </div>
+</div>
+
+
+
+
+
+						

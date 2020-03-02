@@ -16,15 +16,15 @@
                 <%= select_tag :city, options_for_select(Group.cities), include_blank: true %>
               </span>
             </td>
+            <td><strong>カテゴリー</strong><br>
+              <span>
+                <%= select_tag :category, options_for_select(Group.categories), include_blank: true %>
+              </span>
+            </td>
             <td>
               <strong>募集メンバー</strong><br>
               <span>
                 <%= select_tag :level, options_for_select(TeammateRecruitment.levels), include_blank: true %>
-              </span>
-            </td>
-            <td><strong>カテゴリー</strong><br>
-              <span>
-                <%= select_tag :category, options_for_select(Group.categories), include_blank: true %>
               </span>
             </td>
             <td><br><span><%= submit_tag "検索" %></span></td>
@@ -32,9 +32,9 @@
       </table>
     <% end %>
   </div>
+</div>
 <%# 絞り込み検索ここまで %>
 
-</div>
 <div class ="row">
   <% @teammate_recruitments.each do |teammate_recruitment|%>
     <div class="col-6">
