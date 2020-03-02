@@ -1,2 +1,5 @@
-<h1>Matchmakes#edit</h1>
-<p>Find me in app/views/matchmakes/edit.html.erb</p>
+<h2>マッチメイク募集の編集</h2>
+<%= form_for @matchmake, url:group_matchmake_path(@matchmake.group,@matchmake) do |f| %>
+  <%= render 'layouts/error_messages', record: @matchmake %>
+  <%= render "matchmake_form", f: f %>
+<% end %>

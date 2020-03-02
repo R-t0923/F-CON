@@ -42,7 +42,7 @@ class TeammateRecruitmentsController < ApplicationController
   def update
     @teammate_recruitment = TeammateRecruitment.find(params[:id])
     if @teammate_recruitment.update(teammate_recruitment_params)
-      redirect_to @teammate_recruitment ,notice: "チーム編集が完了しました"
+      redirect_to @teammate_recruitment ,notice: "投稿編集が完了しました"
     else
       render :edit
     end

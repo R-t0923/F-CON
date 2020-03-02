@@ -75,7 +75,7 @@
     <% if @user == current_end_user %>
       <table class="table table-borderless">
         <tr>
-          <td><%= link_to "マッチメイク 検討中"%></td>
+          <td><%= link_to "マッチメイクのお気に入り一覧", user_matchmake_favorites_path(current_end_user)%></td>
         </tr>
         <tr>
           <td><%= link_to "メンバー募集のお気に入り一覧", user_teammate_favorites_path(current_end_user)%></td>

@@ -28,10 +28,16 @@
           </td>
         </tr>
         <tr>
-          <td><%= link_to "マッチメイクを募集する", "#" ,class: "btn btn-success btn-sm btn-block"%></td><br>
+          <td>
+            <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-success btn-sm btn-block"%><br>
+            <%= link_to "マッチメイク投稿一覧", group_matchmake_index_path(@group) %>
+          </td>
         </tr>
         <tr>
-          <td><%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %></td>
+          <td>
+            <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %><br>
+            <%= link_to "メンバー募集投稿一覧", group_teammate_recruitment_index_path(@group) %>
+          </td>
         </tr>
       <% end %>
       <%# ここまで %>
