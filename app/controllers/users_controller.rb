@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def ensure_correct_user
     @user = EndUser.find_by(id: params[:id])
     if @user.id != current_end_user.id
-    redirect_to root_path
+      redirect_to root_path
     end
   end
 
