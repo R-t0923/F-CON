@@ -6,6 +6,13 @@ class UsersController < ApplicationController
   def index
     # 新しい順に上から表示（降順）８人毎にページをかえる
     @users = EndUser.all.order(created_at: :desc).page(params[:page]).per(8)
+    # モデルに定義した絞り込み検索の記述を呼び出す
+    if params[:nick_name].present?
+    @users = @users.get_by_nick_name params[:nick_name]
+    end
+    if params[:age].present?
+    @users = @users.get_by_age params[:age]
+    end
   end
 
   def show

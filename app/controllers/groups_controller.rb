@@ -5,7 +5,17 @@ class GroupsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）,８投稿毎にページをかえる
-    @groups = Group.all.order(created_at: :desc).page(params[:page]).per(8) 
+    @groups = Group.all.order(created_at: :desc).page(params[:page]).per(8)
+    # モデルに定義した絞り込み検索の記述を呼び出す
+    if params[:name].present?
+    @groups = @groups.get_by_name params[:name]
+    end
+    if params[:city].present?
+    @groups = @groups.get_by_city params[:city]
+    end
+    if params[:category].present?
+    @groups = @groups.get_by_category params[:category]
+    end
   end
 
   def new
