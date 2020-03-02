@@ -9,7 +9,7 @@
       </tr>
       
       <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
-      <% if @user == current_end_user %>
+      <% if @user == current_end_user || current_end_user.admin? %>
       <tr>
         <td>
           <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>

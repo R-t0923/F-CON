@@ -16,7 +16,7 @@
         </td>
       </tr>
       <%# group作成者のend_user_idとログインユーザーidが一緒なら表示 %>
-      <% if @group.end_user_id == current_end_user.id %>
+      <% if @group.end_user_id == current_end_user.id || current_end_user.admin? %>
         <tr>
           <td>
             <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>

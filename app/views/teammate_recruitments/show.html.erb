@@ -16,7 +16,7 @@
         </td>
       </tr>
       <%# group_idとgroup.idが一緒なら表示 %>
-      <% if @teammate_recruitment.group.end_user_id == current_end_user.id %>
+      <% if @teammate_recruitment.group.end_user_id == current_end_user.id || current_end_user.admin? %>
         <tr>
           <td>
             <%= link_to "編集する",edit_group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) ,class: "btn btn-primary btn-sm btn-block" %>
