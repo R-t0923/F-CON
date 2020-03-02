@@ -66,13 +66,9 @@ class TeammateRecruitmentsController < ApplicationController
   end
 
   def ensure_correct_user
-    @user = EndUser.find(1)
     @group = Group.find_by(id: params[:group_id])
     if @group.end_user_id != current_end_user.id
     redirect_to root_path
-    else @user != current_end_user.id
-      redirect_to root_path
     end
   end
-
 end
