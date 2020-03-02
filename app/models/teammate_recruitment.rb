@@ -14,9 +14,18 @@ class TeammateRecruitment < ApplicationRecord
   scope :get_by_level, ->(level) {
   where(level: level)
   }
-  
-  
-
+  # groupのnameを結合
+  scope :get_by_name, -> name {
+    joins(:group).where('groups.name = ?', name)
+  }
+# groupのcityを結合
+  scope :get_by_city, -> city {
+    joins(:group).where('groups.city = ?', city)
+  }
+# groupのcategoryを結合
+  scope :get_by_category, -> category {
+    joins(:group).where('groups.category = ?', category)
+  }
   validates :title, presence: true, length: {maximum: 30}
   validates :schedule, presence: true, length: {maximum: 100}
   validates :money, presence: true, length: {maximum: 100}

@@ -1,6 +1,5 @@
 class TeammateRecruitmentsController < ApplicationController
-  # ログイン済ユーザーのみにアクセスを許可する
-  before_action :authenticate_end_user!
+  before_action :authenticate_end_user!,except: [:index, :show]
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
