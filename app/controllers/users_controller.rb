@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
   def show
     @user = EndUser.find(params[:id])
-    @groups = Group.where(end_user_id: @user.id).page(params[:page]).per(2) 
   end
 
   def edit
@@ -39,6 +38,10 @@ class UsersController < ApplicationController
     group = Group.where(end_user_id: user.id)
     group.destroy_all
     redirect_to root_path
+  end
+
+  def create_groups
+    @create_groups = GroupUser.where(end_user_id: current_end_user.id).order(created_at: :desc).page(params[:page]).per(8) 
   end
 
   private

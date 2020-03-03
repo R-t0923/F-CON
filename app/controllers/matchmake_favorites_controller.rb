@@ -1,7 +1,7 @@
 class MatchmakeFavoritesController < ApplicationController
   before_action :authenticate_end_user!
   def index
-    @favorites = MatchmakeFavorite.where(end_user_id: current_end_user.id)
+    @favorites = MatchmakeFavorite.where(end_user_id: current_end_user.id).order(created_at: :desc).page(params[:page]).per(8)
   end
   def create
     matchmake =Matchmake.find(params[:matchmake_id])
