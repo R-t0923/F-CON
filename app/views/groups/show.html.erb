@@ -27,6 +27,25 @@
             <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
           </td>
         </tr>
+      <% end %>
+        <tr>
+          <td>
+          <%# チーム参加、脱退機能 %>
+            <% if @group.join_by?(current_end_user) %>
+                <%= link_to   group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :delete do %>
+                  <i  aria-hidden="true" ></i>
+                  <%= "チームから抜ける" %>
+                <% end %>
+            <% else %>
+                <%= link_to  group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :post do %>
+                  <i  aria-hidden="true" ></i>
+                  <%= "チームに参加する" %> 
+                <% end %>
+            <% end %>
+            <%# チーム参加、脱退機能ここまで %>
+          </td>
+        </tr>
+        <% if @group.end_user_id == current_end_user.id || current_end_user.admin? %>
         <tr>
           <td>
             <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-success btn-sm btn-block"%><br>
@@ -83,3 +102,4 @@
     </table>
   </div>
 </div>
+

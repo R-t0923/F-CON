@@ -5,6 +5,10 @@ class Group < ApplicationRecord
   has_many :matchmakes, dependent: :destroy
   
   belongs_to :end_user
+
+  def join_by?(end_user)
+		group_users.where(end_user_id: end_user.id).exists?
+	end
   
   # rifileで画像を登録できるようにするための記述
   attachment :group_image

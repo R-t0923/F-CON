@@ -19,6 +19,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    @group.end_users << current_end_user
   end
 
   def create
@@ -47,6 +48,7 @@ class GroupsController < ApplicationController
 
   def show
   @group = Group.find(params[:id])
+  
   end
 
   def destroy
@@ -65,9 +67,11 @@ class GroupsController < ApplicationController
     @teammate_recruitments = TeammateRecruitment.where(group_id: @group)
   end
 
+  
+
   private
   def group_params
-    params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :group_introduction, :group_image, :end_user_id)
+    params.require(:group).permit(:name, :city, :place, :category, :male_member, :female_member, :average_age, :level, :group_introduction, :group_image, end_user_ids: [])
   end
 
   def ensure_correct_user

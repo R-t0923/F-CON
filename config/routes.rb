@@ -11,16 +11,19 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homes#top'
   get 'about' => 'homes#about', as: 'about'
-
+  
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
+    get 'create_groups' => 'users#create_groups'
     resources :teammate_favorites, only: [:index]
     resources :matchmake_favorites, only: [:index]
+    resources :group_users, only: [:index]
   end
   resources :groups, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     get 'matchmake_index' => 'groups#matchmake_index'
     get 'teammate_recruitment_index' => 'groups#teammate_recruitment_index'
     resources :matchmakes, only: [:new, :create, :edit, :update, :destroy] 
     resources :teammate_recruitments, only: [:new, :create, :edit, :update, :destroy] 
+    resource :group_users, only: [:create, :destroy]
   end
   resources :teammate_recruitments, only: [:index, :show] do
     resources :teammate_comments, only: [:create, :destroy]
@@ -31,4 +34,5 @@ Rails.application.routes.draw do
     resource :matchmake_favorites, only: [:create, :destroy]
   end
   
+
 end
