@@ -10,7 +10,7 @@
           <th><th>
         </tr>
       </thead>
-      <% @teammate_recruitments.each do |teammate_recruitment| %>
+      <% teammate_recruitments.each do |teammate_recruitment| %>
         <tbody>
           <tr>
             <td>
@@ -27,5 +27,6 @@
         </tbody>
       <% end %>
     </table>
+    <%= paginate teammate_recruitments, class: "paginate" %>
   </div>
 </div>

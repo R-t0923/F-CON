@@ -1,75 +1,63 @@
-<%= link_to root_path do %>
-  <span class="navbar-brand">F/CON</span>
+<!-- ログインしているユーザーのヘッダー -->
+<% if end_user_signed_in?%>
+  <ul class="nav navber">
+    <li>
+      <%= link_to "About", about_path, class:
+        "nav-link" %>
+    </li>
+    <li>
+      <%= link_to "会員一覧", users_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "チーム一覧", groups_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "マッチメイク募集一覧", matchmakes_path, class:"nav-link"%>
+    </li>
+  </ul>
+    <!-- ログインユーザの名前 -->
+    <span class="current_name">ようこそ <%= current_end_user.nick_name %>さん！</span>
+<%# adiminのヘッダー %>
+<% elsif admin_signed_in?%>
+  <ul class="nav navber">
+    <li>
+      <%= link_to "About", about_path, class:
+        "nav-link" %>
+    </li>
+    <li>
+      <%= link_to "会員一覧", users_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "チーム一覧", groups_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "マッチメイク募集一覧", matchmakes_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "Logout", destroy_end_user_session_path, method: :delete, class: "nav-link" %>
+    </li>
+  </ul>
+  <span class="current_name">管理者</span>
+<!-- ログインしてないユーザー -->
+<% else %>
+  <ul class="nav navber">
+    <li>
+      <%= link_to "About", about_path, class: "nav-link" %>
+    </li>
+    <li>
+      <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
+    </li>
+    <li>
+      <%= link_to "マッチメイク募集一覧", matchmakes_path, class:"nav-link"%>
+    </li>
+  </ul>
+  <!-- ログインユーザの名前 -->
+  <span class="current_name">ようこそ！！　ゲストさん</span>
 <% end %>
-    <!-- ログインしているユーザーのヘッダー -->
-    <% if end_user_signed_in?%>
-      <ul class="nav navber">
-        <li>
-          <%= link_to "About", about_path, class:
-            "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "会員一覧", users_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "チーム一覧", groups_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "マッチメイク募集一覧", matchmakes_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "Logout", destroy_end_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "MyPage", user_path(current_end_user), class: "nav-link" %>
-        </li>
-      </ul>
-        <!-- ログインユーザの名前 -->
-        <span class="current_name">ようこそ <%= current_end_user.nick_name %>さん！</span>
-    <%# adiminのヘッダー %>
-    <% elsif admin_signed_in?%>
-      <ul class="nav navber">
-        <li>
-          <%= link_to "About", about_path, class:
-            "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "会員一覧", users_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "チーム一覧", groups_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "マッチメイク募集一覧", matchmakes_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "Logout", destroy_end_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
-      </ul>
-      <span class="current_name">管理者</span>
-    <!-- ログインしてないユーザー -->
-    <% else %>
-      <ul class="nav navber">
-        <li>
-          <%= link_to "About", about_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "メンバー募集一覧", teammate_recruitments_path, class:"nav-link"%>
-        </li>
-        <li>
-          <%= link_to "新規登録", new_end_user_registration_path, class: "nav-link" %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_end_user_session_path, class: "nav-link" %>
-        </li>
-      </ul>
-      <!-- ログインユーザの名前 -->
-      <span class="current_name">ようこそ！！　ゲストさん</span>
-    <% end %>
 

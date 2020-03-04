@@ -1,0 +1,19 @@
+<h2>投稿一覧</h2>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#join" class="nav-link active" data-toggle="tab">メンバー募集</a>
+  </li>
+  <li class="nav-item">
+    <a href="#create" class="nav-link" data-toggle="tab">マッチメイク</a>
+  </li>
+</ul>
+
+ <div class="tab-content">
+  <div id="join" class="tab-pane active">
+    <%= render "teammate_recruitment_post", teammate_recruitments: @teammate_recruitments %>
+  </div>
+  <div id="create" class="tab-pane">
+    <%= render "matchmake_post", matchmakes: @matchmakes %>
+  </div>
+</div>

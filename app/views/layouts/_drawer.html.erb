@@ -1,0 +1,23 @@
+<% if end_user_signed_in?%>
+  <nav class="drawer-nav" role="navigation">
+    <ul class="drawer-menu"></ul>
+      <li><%= link_to "マイページ", user_path(current_end_user), class: "nav-link" %></li>
+      <li><%= link_to "お気に入り",user_favorites_path(current_end_user), class:"nav-link"%></li>
+      <li><%= link_to "マイチーム一覧", user_group_users_path(current_end_user) ,class:"nav-link"%></li>
+      <li>
+        <%= link_to "Logout", destroy_end_user_session_path, method: :delete, class: "nav-link" %>
+      </li>
+    </ul>
+  </nav>
+<% else %>
+  <nav class="drawer-nav" role="navigation">
+    <ul class="drawer-menu"></ul>
+      <li>
+        <%= link_to "新規登録", new_end_user_registration_path, class: "nav-link" %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_end_user_session_path, class: "nav-link" %>
+      </li>
+    </ul>
+  </nav>
+<% end %>
