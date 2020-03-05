@@ -2,8 +2,6 @@ class TeammateCommentsController < ApplicationController
   before_action :authenticate_end_user!
   def create
     teammate_recruitment = TeammateRecruitment.find(params[:teammate_recruitment_id])
-    # comment = TeammateComment.new(teammate_comment_params)
-    # comment.user_id = current_user.id
     comment = current_end_user.teammate_comments.new(teammate_comment_params)
     comment.teammate_recruitment_id = teammate_recruitment.id
     comment.save

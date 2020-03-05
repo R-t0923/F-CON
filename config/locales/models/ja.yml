@@ -1,0 +1,40 @@
+ja:
+  activerecord:
+    models:
+      end_user: 
+      group:
+    attributes:
+      end_user:
+        email: メールアドレス
+        password: パスワード
+        nick_name: ニックネーム
+        phone_number: 電話番号
+        gender: 性別
+        age: 年齢
+        fotsal_experience: フットサル経験
+        soccer_experience: サッカー経験
+      group:
+        name: チーム名
+        city: 活動地域
+        category: カテゴリー
+        male_member: 男性メンバー
+        female_member: 女性メンバー
+        average_age: 平均年齢
+        level: ：レベル
+        group_introduction: チーム紹介
+      matchmake:
+        title: 募集タイトル
+        day: 募集日
+        time: 募集時間
+        money: 参加費
+        place: 開催場所
+        category: カテゴリー
+        capacity: 募集数
+        level: 募集メンバー
+        introduction: 募集内容
+      teammate_recruitment:
+        title: 募集タイトル
+        money: 参加費
+        schedule: 活動日
+        level: 募集メンバー
+        introduction: 募集内容

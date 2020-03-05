@@ -2,8 +2,6 @@ class MatchmakeCommentsController < ApplicationController
   before_action :authenticate_end_user!
   def create
     matchmake = Matchmake.find(params[:matchmake_id])
-    # comment = MatchmakeComment.new(matchmake_comment_params)
-    # comment.user_id = current_user.id
     comment = current_end_user.matchmake_comments.new(matchmake_comment_params)
     comment.matchmake_id = matchmake.id
     comment.save

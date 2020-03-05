@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_end_user!,except: [:index, :show]
+  before_action :authenticate_end_user!,except: [:index, :show, :menber_index]
   # ユーザー本人とAdminしか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index

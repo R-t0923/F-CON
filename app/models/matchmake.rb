@@ -23,7 +23,7 @@ class Matchmake < ApplicationRecord
   }
   # groupのnameを結合
   scope :get_by_name, -> name {
-    joins(:group).where('groups.name = ?', name)
+    joins(:group).where('groups.name like ?', "%#{name}%")
   }
 
   validates :title, presence: true, length: {maximum: 30}
@@ -33,6 +33,6 @@ class Matchmake < ApplicationRecord
   validates :day, presence: true
   validates :time, presence: true
   validates :category, presence: true
-  validates :capacity, presence: true
+  validates :capacity, presence: true, format: { with:/\A[0-9]+\z/}
   validates :introduction, presence: true, length: {maximum: 1000}
 end

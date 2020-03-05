@@ -26,6 +26,7 @@ class EndUser < ApplicationRecord
     scope :get_by_age, ->(age) {
     where(age: age)
     }
+    
   validates :nick_name, presence: true, length: {maximum: 15 }
   validates :introduction, length: {maximum: 500 }
   #ハイフン込みで電話番号を入力

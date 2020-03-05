@@ -7,22 +7,24 @@
         <%= attachment_image_tag @user, :user_image, size: "300x250", fallback: "no_image.jpg"%>
         </td>
       </tr>
-      
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
       <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
-      <% if @user == current_end_user || current_end_user.admin? %>
-      <tr>
-        <td>
-          <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-        <td>
-      </tr>
-      <tr>
-        <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
-      </tr>
+        <% if @user == current_end_user || current_end_user.admin? %>
+        <tr>
+          <td>
+            <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          <td>
+        </tr>
+        <tr>
+          <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
+        </tr>
+        <% end %>
       <% end %>
       <%# ここまで %>
     </table>
