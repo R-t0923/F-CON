@@ -1,4 +1,4 @@
-<h2>グループ 詳細</h2>
+<h2>チーム詳細</h2>
 <div class="row">
   <div class="col-4 offset-1">
     <table class="table table-borderless">
@@ -15,50 +15,56 @@
           <% end %>
         </td>
       </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
       <%# group作成者のend_user_idとログインユーザーidが一緒なら表示 %>
-      <% if @group.end_user_id == current_end_user.id || current_end_user.admin? %>
-        <tr>
-          <td>
-            <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-          </td>
-        </tr>
-      <% end %>
-        <tr>
-          <td>
-          <%# チーム参加、脱退機能 %>
-            <% if @group.join_by?(current_end_user) %>
-                <%= link_to   group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :delete do %>
-                  <i  aria-hidden="true" ></i>
-                  <%= "チームから抜ける" %>
-                <% end %>
-            <% else %>
-                <%= link_to  group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :post do %>
-                  <i  aria-hidden="true" ></i>
-                  <%= "チームに参加する" %> 
-                <% end %>
-            <% end %>
-            <%# チーム参加、脱退機能ここまで %>
-          </td>
-        </tr>
         <% if @group.end_user_id == current_end_user.id || current_end_user.admin? %>
-        <tr>
-          <td>
-            <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-success btn-sm btn-block"%><br>
-            <%= link_to "マッチメイク投稿一覧", group_matchmake_index_path(@group) %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %><br>
-            <%= link_to "メンバー募集投稿一覧", group_teammate_recruitment_index_path(@group) %>
-          </td>
-        </tr>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-success btn-sm btn-block"%>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %><br>
+              <%= link_to "メンバー募集投稿一覧", group_post_index_path(@group) %>
+            </td>
+          </tr>
+          <% else %>
+          <tr>
+            <td>
+            <%# チーム参加、脱退機能 %>
+              <% if @group.join_by?(current_end_user) %>
+                  <%= link_to   group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :delete do %>
+                    <i  aria-hidden="true" ></i>
+                    <%= "チームから抜ける" %>
+                  <% end %>
+              <% else %>
+                  <%= link_to  group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :post do %>
+                    <i  aria-hidden="true" ></i>
+                    <%= "チームに参加する" %> 
+                  <% end %>
+              <% end %>
+              <%# チーム参加、脱退機能ここまで %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
+      <tr>
+          <td>
+            <%= link_to "メンバー一覧",group_menber_index_path(@group) %>
+          </td>
+        </tr>
       <%# ここまで %>
     </table>
   </div>

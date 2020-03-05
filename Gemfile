@@ -76,3 +76,5 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'pry-byebug'
 gem 'pry-rails'
+
+gem 'rails-i18n'

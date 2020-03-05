@@ -10,7 +10,7 @@
           <th><th>
         </tr>
       </thead>
-      <% @matchmakes.each do |matchmake| %>
+      <% matchmakes.each do |matchmake| %>
         <tbody>
           <tr>
             <td>
@@ -27,5 +27,6 @@
         </tbody>
       <% end %>
     </table>
+    <%= paginate matchmakes, class: "paginate" %>
   </div>
 </div>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_end_user!,except: [:index, :show]
-  # ユーザー本人しか下記のアクションを行えないようにする
+  # ユーザー本人とAdminしか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）８人毎にページをかえる
@@ -40,10 +40,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def create_groups
-    @create_groups = GroupUser.where(end_user_id: current_end_user.id).order(created_at: :desc).page(params[:page]).per(8) 
-  end
-
   private
   def end_user_params
     params.require(:end_user).permit(:nick_name, :phone_number, :gender, :age, :fotsal_experience, :soccer_experience, :introduction, :user_image, :email, :deleted_at)
@@ -51,7 +47,7 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = EndUser.find_by(id: params[:id])
-    if @user.id != current_end_user.id
+    if @user.id != current_end_user.id || current_end_user.admin == false
       redirect_to root_path
     end
   end

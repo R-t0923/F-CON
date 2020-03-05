@@ -7,22 +7,24 @@
         <%= attachment_image_tag @user, :user_image, size: "300x250", fallback: "no_image.jpg"%>
         </td>
       </tr>
-      
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
       <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
-      <% if @user == current_end_user || current_end_user.admin? %>
-      <tr>
-        <td>
-          <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-        <td>
-      </tr>
-      <tr>
-        <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
-      </tr>
+        <% if @user == current_end_user || current_end_user.admin? %>
+        <tr>
+          <td>
+            <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+          <td>
+        </tr>
+        <tr>
+          <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
+        </tr>
+        <% end %>
       <% end %>
       <%# ここまで %>
     </table>
@@ -58,28 +60,4 @@
       
   </div>
 </div>
-<div class="row">
-  <div class="col-4 offset-1">
-  <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
-    <% if @user == current_end_user %>
-      <table class="table table-borderless">
-        <tr>
-          <td><%= link_to "マッチメイクのお気に入り一覧", user_matchmake_favorites_path(current_end_user)%></td>
-        </tr>
-        <tr>
-          <td><%= link_to "メンバー募集のお気に入り一覧", user_teammate_favorites_path(current_end_user)%></td>
-        </tr>
-        <tr>
-          <td><%= link_to "作成したチーム一覧", user_create_groups_path(current_end_user)%></td>
-        </tr>
-        <tr>
-          <td><%= link_to "参加したチーム一覧", user_group_users_path(current_end_user)%></td>
-        </tr>
-      </table>
-    <% end %>
-    <%# ここまで %>
-  </div>
-</div>
-
-
 

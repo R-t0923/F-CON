@@ -1,6 +1,6 @@
 class MatchmakesController < ApplicationController
   before_action :authenticate_end_user!,except: [:index, :show]
-  # ユーザー本人しか下記のアクションを行えないようにする
+  # ユーザー本人とAdminしか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）,８投稿毎にページをかえる
@@ -9,8 +9,8 @@ class MatchmakesController < ApplicationController
     if params[:name].present?
     @matchmakes = @matchmakes.get_by_name params[:name]
     end
-    if params[:capacity].present?
-    @matchmakes = @matchmakes.get_by_capacity params[:capacity]
+    if params[:category].present?
+    @matchmakes = @matchmakes.get_by_category params[:category]
     end
     if params[:level].present?
     @matchmakes = @matchmakes.get_by_level params[:level]
@@ -67,7 +67,7 @@ class MatchmakesController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find_by(id: params[:group_id])
-    if @group.end_user_id != current_end_user.id
+    if @group.end_user_id != current_end_user.id || current_end_user.admin == false
     redirect_to root_path
     end
   end

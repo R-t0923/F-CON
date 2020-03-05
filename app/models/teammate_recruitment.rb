@@ -16,7 +16,7 @@ class TeammateRecruitment < ApplicationRecord
   }
   # groupのnameを結合
   scope :get_by_name, -> name {
-    joins(:group).where('groups.name = ?', name)
+    joins(:group).where('groups.name like ?', "%#{name}%")
   }
 # groupのcityを結合
   scope :get_by_city, -> city {

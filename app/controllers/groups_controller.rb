@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_end_user!,except: [:index, :show]
-  # ユーザー本人しか下記のアクションを行えないようにする
+  before_action :authenticate_end_user!,except: [:index, :show, :menber_index]
+  # ユーザー本人とAdminしか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
   def index
     # 新しい順に上から表示（降順）,８投稿毎にページをかえる
@@ -27,6 +27,12 @@ class GroupsController < ApplicationController
     #end_user_id=グループ作成者と定義
     @group.end_user_id = current_end_user.id
     if @group.save
+    # グループを作成時にGroupUserにIDが保存される処理
+      @group_user = GroupUser.new
+      # 保存先を指定
+      @group_user.end_user_id = @group.end_user_id
+      @group_user.group_id = @group.id
+      @group_user.save
       redirect_to group_path(@group), notice: "チームを作成しました"
     else
       render :new
@@ -57,17 +63,16 @@ class GroupsController < ApplicationController
     redirect_to root_path
   end
 
-  def matchmake_index 
+  def post_index 
     @group = Group.find_by(end_user_id: current_end_user.id)
-    @matchmakes = Matchmake.where(group_id: @group)
+    @matchmakes = Matchmake.where(group_id: @group).order(created_at: :desc).page(params[:page]).per(8)
+    @teammate_recruitments = TeammateRecruitment.where(group_id: @group).order(created_at: :desc).page(params[:page]).per(8)
   end
 
-  def teammate_recruitment_index
-    @group = Group.find_by(end_user_id: current_end_user.id)
-    @teammate_recruitments = TeammateRecruitment.where(group_id: @group)
+  def menber_index
+    @group = Group.find(params[:group_id])
+    @menbers = GroupUser.where(group_id: @group.id)
   end
-
-  
 
   private
   def group_params
@@ -76,7 +81,7 @@ class GroupsController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find_by(id: params[:id])
-    if @group.end_user_id != current_end_user.id
+    if @group.end_user_id != current_end_user.id || current_end_user.admin == false
     redirect_to root_path
     end
   end

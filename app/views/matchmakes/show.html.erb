@@ -15,51 +15,55 @@
           <% end %>
         </td>
       </tr>
-      <%# group_idとgroup.idが一緒なら表示 %>
-      <% if @matchmake.group.end_user_id == current_end_user.id || current_end_user.admin? %>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
+        <%# group_idとgroup.idが一緒なら表示 %>
+        <% if @matchmake.group.end_user_id == current_end_user.id || current_end_user.admin? %>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-primary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+            </td>
+          </tr>
+        <% end %>
+        <%# ここまで %>
         <tr>
           <td>
-            <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-primary btn-sm btn-block" %>
+          <%# コメント機能 %>
+            <%= form_for [@matchmake, @comment] do |f| %>
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+              <%= f.submit "送信する", class: "btn btn-sm" %>
+            <% end %>
+          <%# コメント機能　ここまで %>
           </td>
-        </tr>
         <tr>
-          <td>
-            <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-          </td>
-        </tr>
       <% end %>
-      <%# ここまで %>
-      <tr>
-        <td>
-
-        <%# コメント機能 %>
-          <%= form_for [@matchmake, @comment] do |f| %>
-            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-            <%= f.submit "送信する", class: "btn btn-sm" %>
-          <% end %>
-        <%# コメント機能　ここまで %>
-
-        </td>
-      <tr>
+      <%# ログインしていないユーザーはここまで表示しない %>
     </table>
   </div>
   <div class="col-6">
   <span>投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %></span>
-
+  <%# ログインしてないユーザーの場合表示しない %>
+  <% if end_user_signed_in?%>
   <%# いいね機能 %>
-  <% if @matchmake.favorited_by?(current_end_user) %>
-      <%= link_to  matchmake_matchmake_favorites_path(@matchmake), method: :delete do %>
-        <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
-        <%= "お気に入りを削除" %>
-      <% end %>
-  <% else %>
-      <%= link_to matchmake_matchmake_favorites_path(@matchmake), method: :post do %>
-        <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
-        <%= "お気に入りに追加" %> 
-      <% end %>
-  <% end %>
+    <% if @matchmake.favorited_by?(current_end_user) %>
+        <%= link_to  matchmake_matchmake_favorites_path(@matchmake), method: :delete do %>
+          <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
+          <%= "お気に入りを削除" %>
+        <% end %>
+    <% else %>
+        <%= link_to matchmake_matchmake_favorites_path(@matchmake), method: :post do %>
+          <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
+          <%= "お気に入りに追加" %> 
+        <% end %>
+    <% end %>
   <%# いいね機能ここまで %>
-
+  <% end %>
+  <%# ログインしていないユーザーはここまで表示しない %>
   <h4><%= @matchmake.title%></h4>
     <table class="table table-bordered">
       <tr>
@@ -99,44 +103,45 @@
   </div>
 </div>
 
-<div class="row">
-	<h2>コメント一覧</h2>
-	<div class ="col-10 offset-1">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>投稿者</th>
-          <th>コメント</th>
-          <th>投稿日</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @comments.each do |comment| %>
+<% if end_user_signed_in?%>
+  <div class="row">
+    <h2>コメント一覧</h2>
+    <div class ="col-10 offset-1">
+      <table class="table">
+        <thead>
           <tr>
-            <td width="160">
-              <%= comment.end_user.nick_name %>
-            </td>
-            <td width="250">
-              <%= simple_format(comment.comment) %>
-            </td>
-            <td width="160">
-              <%= comment.created_at.strftime("%Y年%m月%d日") %>
-              </td>
-            <td width="135">
-              <% if comment.end_user == current_end_user %>
-              <%# matchmakeのidとcommentのidを両方渡している。 %>
-                <%= link_to "コメントを消す", matchmake_matchmake_comment_path(@matchmake,comment.id), method: :delete, class:"btn-sm btn-danger" %>
-              <% end %>
-            </td>
+            <th>投稿者</th>
+            <th>コメント</th>
+            <th>投稿日</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @comments, class: "paginate" %>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td width="160">
+                <%= comment.end_user.nick_name %>
+              </td>
+              <td width="250">
+                <%= simple_format(comment.comment) %>
+              </td>
+              <td width="160">
+                <%= comment.created_at.strftime("%Y年%m月%d日") %>
+                </td>
+              <td width="135">
+                <% if comment.end_user == current_end_user %>
+                <%# matchmakeのidとcommentのidを両方渡している。 %>
+                  <%= link_to "コメントを消す", matchmake_matchmake_comment_path(@matchmake,comment.id), method: :delete, class:"btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @comments, class: "paginate" %>
+    </div>
   </div>
-</div>
-
+<% end %>
 
 
 
