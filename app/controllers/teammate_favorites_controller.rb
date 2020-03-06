@@ -7,16 +7,14 @@ class TeammateFavoritesController < ApplicationController
     @matchmake_favorites = MatchmakeFavorite.where(end_user_id: current_end_user.id).order(created_at: :desc).page(params[:page]).per(8)
   end
   def create
-    teammate_recruitment =TeammateRecruitment.find(params[:teammate_recruitment_id])
-    favorite = current_end_user.teammate_favorites.new(teammate_recruitment_id: teammate_recruitment.id)
+    @teammate_recruitment =TeammateRecruitment.find(params[:teammate_recruitment_id])
+    favorite = current_end_user.teammate_favorites.build(teammate_recruitment_id: @teammate_recruitment.id)
     favorite.save
-    redirect_back(fallback_location: root_path)
   end
   def destroy
-    teammate_recruitment =TeammateRecruitment.find(params[:teammate_recruitment_id])
-    favorite = current_end_user.teammate_favorites.find_by(teammate_recruitment_id: teammate_recruitment.id)
+    @teammate_recruitment =TeammateRecruitment.find(params[:teammate_recruitment_id])
+    favorite = current_end_user.teammate_favorites.find_by(teammate_recruitment_id: @teammate_recruitment.id)
     favorite.destroy
-    redirect_back(fallback_location: root_path)
   end
 end
 

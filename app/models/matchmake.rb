@@ -27,12 +27,12 @@ class Matchmake < ApplicationRecord
   }
 
   validates :title, presence: true, length: {maximum: 30}
-  validates :money, presence: true, length: {maximum: 100}
-  validates :place, presence: true, length: {maximum: 100}
   validates :level, presence: true
+  validates :category, presence: true
+  validates :capacity, format: { with:/\A[0-9]+\z/}
   validates :day, presence: true
   validates :time, presence: true
-  validates :category, presence: true
-  validates :capacity, presence: true, format: { with:/\A[0-9]+\z/}
+  validates :place, presence: true, length: {maximum: 100}
+  validates :money, presence: true, length: {maximum: 100}
   validates :introduction, presence: true, length: {maximum: 1000}
 end

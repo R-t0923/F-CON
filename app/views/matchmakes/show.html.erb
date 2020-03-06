@@ -49,21 +49,11 @@
   <div class="col-6">
   <span>投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %></span>
   <%# ログインしてないユーザーの場合表示しない %>
-  <% if end_user_signed_in?%>
-  <%# いいね機能 %>
-    <% if @matchmake.favorited_by?(current_end_user) %>
-        <%= link_to  matchmake_matchmake_favorites_path(@matchmake), method: :delete do %>
-          <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
-          <%= "お気に入りを削除" %>
-        <% end %>
-    <% else %>
-        <%= link_to matchmake_matchmake_favorites_path(@matchmake), method: :post do %>
-          <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
-          <%= "お気に入りに追加" %> 
-        <% end %>
-    <% end %>
-  <%# いいね機能ここまで %>
-  <% end %>
+    <%# いいね機能 %>
+    <div id="favorites_buttons_<%= @matchmake.id %>">
+      <%= render partial: 'matchmake_favorites/favorites_button', locals: {matchmake: @matchmake} %>
+    </div>
+    <%# いいね機能ここまで %>
   <%# ログインしていないユーザーはここまで表示しない %>
   <h4><%= @matchmake.title%></h4>
     <table class="table table-bordered">

@@ -28,14 +28,16 @@ class EndUser < ApplicationRecord
     }
     
   validates :nick_name, presence: true, length: {maximum: 15 }
-  validates :introduction, length: {maximum: 500 }
   #ハイフン込みで電話番号を入力
-  validates :phone_number, presence: true, format: { with: /\A\d{3}[-]\d{4}[-]\d{4}\z/ }
+  validates :phone_number, format: { with: /\A\d{3}[-]\d{4}[-]\d{4}\z/ }
+  validates :introduction, length: {maximum: 500 }
+  
   validates :gender, presence: true
   validates :age, presence: true
   # 半角数字のみ
-  validates :fotsal_experience, presence: true, format: { with:/\A[0-9]+\z/}
-  validates :soccer_experience, presence: true, format: { with:/\A[0-9]+\z/}
+  validates :soccer_experience, format: { with:/\A[0-9]+\z/}
+  validates :fotsal_experience, format: { with:/\A[0-9]+\z/}
+  
 
   #論理削除(paranoia)を使うための記述
   acts_as_paranoid

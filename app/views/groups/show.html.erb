@@ -45,17 +45,9 @@
           <tr>
             <td>
             <%# チーム参加、脱退機能 %>
-              <% if @group.join_by?(current_end_user) %>
-                  <%= link_to   group_group_users_path(@group),class:"btn btn-danger btn-sm btn-block", method: :delete do %>
-                    <i  aria-hidden="true" ></i>
-                    <%= "チームから抜ける" %>
-                  <% end %>
-              <% else %>
-                  <%= link_to  group_group_users_path(@group),class:"btn btn-success btn-sm btn-block", method: :post do %>
-                    <i  aria-hidden="true" ></i>
-                    <%= "チームに参加する" %> 
-                  <% end %>
-              <% end %>
+              <div id="group_users_buttons_<%= @group.id %>">
+                <%= render partial: 'group_users/join_button', locals: {group: @group} %>
+              </div>
               <%# チーム参加、脱退機能ここまで %>
             </td>
           </tr>

@@ -1,0 +1,13 @@
+<% if end_user_signed_in?%>
+  <% if teammate_recruitment.favorited_by?(current_end_user) %>
+      <%= link_to  teammate_recruitment_teammate_favorites_path(teammate_recruitment), method: :delete, remote: true do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
+        <%= "お気に入りを削除" %>
+      <% end %>
+  <% else %>
+      <%= link_to teammate_recruitment_teammate_favorites_path(teammate_recruitment), method: :post, remote: true do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
+        <%= "お気に入りに追加" %> 
+      <% end %>
+  <% end %>
+<% end %>

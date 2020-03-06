@@ -1,0 +1,13 @@
+ <% if end_user_signed_in?%>
+  <% if matchmake.favorited_by?(current_end_user) %>
+      <%= link_to  matchmake_matchmake_favorites_path(@matchmake), method: :delete, remote: true do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" ></i>
+        <%= "お気に入りを削除" %>
+      <% end %>
+  <% else %>
+      <%= link_to matchmake_matchmake_favorites_path(@matchmake), method: :post, remote: true do %>
+        <i class="fas fa-thumbs-up" aria-hidden="true" style="color: white;"></i>
+        <%= "お気に入りに追加" %> 
+      <% end %>
+  <% end %>
+<% end %>

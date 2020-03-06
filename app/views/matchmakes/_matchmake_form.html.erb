@@ -22,7 +22,7 @@
       <tr>
         <th>募集数</th>
         <td>
-          <%= f.number_field :capacity, min: 0, max: 10 %>チーム
+          <%= f.number_field :capacity, min: 1, max: 10 %>チーム
         </td>
       </tr>
       <tr>
@@ -47,7 +47,7 @@
       <tr>
         <th>募集内容</th>
         <td>
-          <%= f.text_area :introduction, placeholder:"例, レベル、カテゴリーに関係なく対戦相手を募集してます！！もし興味のある方コメントにて連絡ください！！よろしくお願いします！！(中学生以下の方はお断り頂いております。ご了承ください。)",size: "50*100" %>
+          <%= f.text_area :introduction, placeholder:"例, レベル、カテゴリーに関係なく対戦相手を募集してます！!もし興味のある方コメントにて連絡ください！！よろしくお願いします！！(中学生以下の方はお断り頂いております。ご了承ください。)",size: "50*100" %>
         </td>
       </tr>
       <tr>
