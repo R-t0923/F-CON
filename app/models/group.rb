@@ -30,7 +30,6 @@ class Group < ApplicationRecord
   }
 
   validates :name, presence: true, length: {maximum: 20 }
-  validates :group_introduction, presence: true,length: {maximum: 1000 }
   validates :city, presence: true
   validates :category, presence: true
   validates :level, presence: true
@@ -38,4 +37,5 @@ class Group < ApplicationRecord
   validates :male_member, presence: true, format: { with:/\A[0-9]+\z/}
   validates :female_member, presence: true, format: { with:/\A[0-9]+\z/}
   validates :average_age, presence: true, format: { with:/\A[0-9]+\z/}
+  validates :group_introduction, presence: true,length: {maximum: 1000 }
 end

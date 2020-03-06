@@ -16,7 +16,7 @@
                 <%= date_field_tag :day, params[:day] %>
               </span>
             </td>
-            <td><strong>募集カテゴリー</strong><br>
+            <td><strong>カテゴリー</strong><br>
               <span>
                 <%= select_tag :category, options_for_select(Matchmake.categories), include_blank: true %>
               </span>

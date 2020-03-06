@@ -27,9 +27,9 @@ class TeammateRecruitment < ApplicationRecord
     joins(:group).where('groups.category = ?', category)
   }
   validates :title, presence: true, length: {maximum: 30}
+  validates :level, presence: true
   validates :schedule, presence: true, length: {maximum: 100}
   validates :money, presence: true, length: {maximum: 100}
-  validates :level, presence: true
   validates :introduction, presence: true, length: {maximum: 1000}
   
 end
