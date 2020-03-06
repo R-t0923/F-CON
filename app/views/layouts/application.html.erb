@@ -23,29 +23,47 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
-  <div class="container">
-  
-  <body class="drawer drawer--right">
-    <header role="banner">
-      <%= link_to root_path do %>
-        <span class="navbar-brand">F/CON</span>
-      <% end %>
-      <%= render 'layouts/header' %>
-      <button type="button" class="drawer-toggle drawer-hamburger">
-        <span class="sr-only">toggle navigation</span>
-        <span class="drawer-hamburger-icon"></span>
-      </button>
+ 
+  <body class="drawer drawer--left">
+    <header role="banner" , class = "bg-dark text-white">
+      <div class="container ">
+        <div class="row">
+          <div class = "col-5">
+            <%= link_to root_path do %>
+              <span class="nav navbar-brand">
+              <%= image_tag 'logo_image2.jpg', class: 'logo_image' %>
+
+              </span>
+            <% end %>
+            <% if end_user_signed_in?%>
+              <span class="current_name">ようこそ <%= current_end_user.nick_name %>さん！</span>
+            <% else %>
+              <span class="current_name">ようこそ！！　ゲストさん</span>
+            <% end %>
+          </div>
+        </div>
+        <div class ="row">
+          <div class = "col-8 offset-2">
+          <%= render 'layouts/header' %>
+          </div>
+        </div>
+        <button type="button" class="drawer-toggle drawer-hamburger">
+          <span class="sr-only">toggle navigation</span>
+          <span class="drawer-hamburger-icon"></span>
+        </button>
+        <%= render 'layouts/drawer' %>
+      </div>
     </header>
-    </div>
     <div class="container">
-      <%= render 'layouts/drawer' %>
-      <p id="notice"><%= notice %></p>
-      <main role="main">
-      <div id="icon"><img id="img"></div>
-        <%= yield %>
-      </main>
-    </body>
-    <footer>
-    </footer>
-    
+      <div id="wrapper">
+        <main role="main" >
+          <%# <div id="icon"><img id="img"></div> %>
+          <%= yield %>
+        </main>
+      </div>
+  </div>
+  <footer class = "bg-dark text-white">
+     <p class="footer-text">© All rights reserved by Infratop.Inc.</p>
+  </footer>
+   </body>
 </html>

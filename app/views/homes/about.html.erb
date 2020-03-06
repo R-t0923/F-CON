@@ -1,2 +1,50 @@
-<h1>Homes#about</h1>
-<p>Find me in app/views/homes/about.html.erb</p>
+<%= image_tag 'background_image2.jpg', class: 'background_image' %>
+<article>
+  <h2 class="text-center">＜＜初めての方へ＞＞</h2>
+
+  <section class="about_section">
+  <h4>F/CONとは？</h4>
+  <p>
+    東京都23区限定のフットサルマッチングサイトです。<br>
+
+    フットサルはチームスポーツ！！<br>
+    そのため、,「フットサルがしたいけど一緒にフットサルができる仲間がいない。」<br>
+    試合がしたいけど、対戦チームを見つけるのが大変。。」<br>
+    「同じレベル感の人と試合がしたい。。。」<br>
+     <span><strong>そんな時には、F/CONの出番です！！</strong></span><br>
+     F/CONでは、地域、レベル、カテゴリー別に試合、新規メンバーの募集があるので、気になるチームがあればすぐにマッチング！！<br>
+    またチーム作成、チーム参加も気軽にできるので、自分の目的に合わせて活用してください！！
+  </p>
+  </section>
+
+  <section class="about_section">
+  <h4>マッチメイクとは？</h4>
+  <p>
+    試合相手の募集ができる機能です。<br>
+    試合相手の内容をレベルやカテゴリー別に選択して、募集をする事ができます。<br>
+    「いつもと違うチームと試合がしたい！」<br>
+    「少しでもコート代を安くしたい！」<br>
+    こんな時には、マッチメイクを活用してください！！
+  </p>
+  </section>
+
+  <section class="about_section">
+  <h4>メンバー募集とは？</h4>
+  <p>
+    新しいチームメイトを募集ができる機能です。<br>
+    チームメイトを地域やカテゴリー別に選択して、募集、参加をする事ができます。<br>
+    「もっとチームの人数を増やしたい！」<br>
+    「近所でフットサルチームがないかな？」<br>
+    こんな時には、メンバー募集をを活用してください！！
+  </p>
+  </section>
+
+  <section class="about_section">
+  <h4>利用するには？</h4>
+  <p>
+    F/CONのサービスは全て無料ですが、閲覧以外のサービスは会員登録が必要です。<br>
+  </p>
+  <%= link_to "新規登録はこちら", new_end_user_registration_path, class: "btn-sm btn-primary " %>
+  </section>
+
+</article>

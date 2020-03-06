@@ -55,9 +55,9 @@ class MatchmakesController < ApplicationController
   end
 
   def destroy
-    matchmake = Matchmake.find(params[:id])
-    matchmake.destroy
-    redirect_to root_path
+    @matchmake = Matchmake.find(params[:id])
+    @matchmake.destroy
+    redirect_to group_path(@matchmake.group_id)
   end
   
   private
@@ -67,8 +67,9 @@ class MatchmakesController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find_by(id: params[:group_id])
-    if @group.end_user_id != current_end_user.id || current_end_user.admin == false
-    redirect_to root_path
+    if @group.end_user_id != current_end_user.id 
+      redirect_to root_path
     end
   end
 end
+# || current_end_user.admin == false
