@@ -40,7 +40,7 @@
         <tbody>
           <tr>
             <td>
-              <%= attachment_image_tag user, :user_image, size: "50x50", fallback: "no_image.jpg"%>
+              <%= attachment_image_tag user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
             </td>
             <td><%= user.nick_name%></td>
             <td><%= user.age%></td>
@@ -52,7 +52,7 @@
           </tr>
         </tbody>
       <% end %>
-    <table>
+    </table>
     <%= paginate @users, class: "paginate" %>
-  <div>
+  </div>
 </div>

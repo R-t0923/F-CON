@@ -1,10 +1,11 @@
+<p id="notice"><%= notice %></p>
 <h2>チーム詳細</h2>
 <div class="row">
   <div class="col-4 offset-1">
     <table class="table table-borderless">
       <tr>
         <td>
-        <%= attachment_image_tag @group, :group_image, size: "300x250", fallback: "no_image2.jpg"%>
+        <%= attachment_image_tag @group, :group_image, size: "300x250", format: 'jpeg', fallback: "no_image2.jpg"%>
         </td>
       </tr>
       <tr>
@@ -37,7 +38,7 @@
           <tr>
             <td>
               <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %><br>
-              <%= link_to "メンバー募集投稿一覧", group_post_index_path(@group) %>
+              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-primary btn-sm btn-block"  %>
             </td>
           </tr>
           <% else %>
@@ -45,12 +46,12 @@
             <td>
             <%# チーム参加、脱退機能 %>
               <% if @group.join_by?(current_end_user) %>
-                  <%= link_to   group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :delete do %>
+                  <%= link_to   group_group_users_path(@group),class:"btn btn-danger btn-sm btn-block", method: :delete do %>
                     <i  aria-hidden="true" ></i>
                     <%= "チームから抜ける" %>
                   <% end %>
               <% else %>
-                  <%= link_to  group_group_users_path(@group),class:"btn btn-warning btn-sm btn-block", method: :post do %>
+                  <%= link_to  group_group_users_path(@group),class:"btn btn-success btn-sm btn-block", method: :post do %>
                     <i  aria-hidden="true" ></i>
                     <%= "チームに参加する" %> 
                   <% end %>
@@ -62,7 +63,7 @@
       <% end %>
       <tr>
           <td>
-            <%= link_to "メンバー一覧",group_menber_index_path(@group) %>
+            <%= link_to "所属メンバー",group_menber_index_path(@group),class: "btn btn-info btn-sm btn-block" %>
           </td>
         </tr>
       <%# ここまで %>

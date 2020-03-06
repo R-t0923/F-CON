@@ -4,6 +4,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th><th>
           <th>ニックネーム</th>
           <th>年齢</th>
           <th>フットサル経験</th>
@@ -14,6 +15,9 @@
       <% @menbers.each do |menber| %>
         <tbody>
           <tr>
+            <td>
+              <%= attachment_image_tag menber.end_user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+            </td>
             <td>
               <%= menber.end_user.nick_name %>
             </td>

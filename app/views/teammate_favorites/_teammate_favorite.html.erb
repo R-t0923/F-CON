@@ -3,6 +3,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th></th>
           <th>投稿タイトル</th>
           <th>カテゴリー</th>
           <th>チームレベル</th>
@@ -13,6 +14,9 @@
       <% teammate_favorites.each do |favorite| %>
         <tbody>
           <tr>
+            <td>
+              <%= attachment_image_tag favorite.teammate_recruitment.group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+            </td>
             <td>
               <%= favorite.teammate_recruitment.title %>
             </td>

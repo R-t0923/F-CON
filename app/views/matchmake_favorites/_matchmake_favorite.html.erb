@@ -3,6 +3,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th></th>
           <th>投稿タイトル</th>
           <th>募集カテゴリー</th>
           <th>募集レベル</th>
@@ -13,6 +14,9 @@
       <% @matchmake_favorites.each do |favorite| %>
         <tbody>
           <tr>
+            <td>
+              <%= attachment_image_tag favorite.matchmake.group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+            </td>
             <td>
               <%= favorite.matchmake.title %>
             </td>

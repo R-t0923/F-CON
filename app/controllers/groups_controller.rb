@@ -54,7 +54,7 @@ class GroupsController < ApplicationController
 
   def show
   @group = Group.find(params[:id])
-  
+  @menbers = GroupUser.where(group_id: @group.id)
   end
 
   def destroy
@@ -81,7 +81,7 @@ class GroupsController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find_by(id: params[:id])
-    if @group.end_user_id != current_end_user.id || current_end_user.admin == false
+    if @group.end_user_id != current_end_user.id
     redirect_to root_path
     end
   end

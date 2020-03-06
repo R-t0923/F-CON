@@ -13,4 +13,66 @@
  */
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap";
+@import "./bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+li {
+  list-style: none;
+} 
+
+header {
+  width: 100%;
+  height: 100px;
+}
+
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+
+footer {
+  margin-top: auto;
+}
+
+.background_image {
+  margin-right: -165px;
+  margin-left: -165px;
+  height: 350px;
+  width: 1440px;
+  
+}
+
+.logo_image {
+ width:100px;
+ height:100%;
+}
+
+
+.text-center {
+  margin-top: 35px;
+}
+
+.home-btn {
+  margin-bottom: 50px;
+}
+
+.about_section {
+  margin: 25px;
+}
+
+header_link:link {color:white; text-decoration:none}
+header_link:visited {color:white; text-decoration:none}
+header_link.hover {color:white; text-decoration:none}
+header_link:active {color:white; text-decoration:none}
