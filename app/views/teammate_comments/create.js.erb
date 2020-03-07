@@ -1,2 +1,2 @@
 $("textarea").val("");
-$(".comment_<%= @teammate_recruitment.id %>").html("<%= j(render 'teammate_comments/comment', comments: @comment ) %>");
+$("#comment_<%= @teammate_recruitment.id %>").html("<%= j(render 'teammate_comments/comment', comments: @comments ) %>");

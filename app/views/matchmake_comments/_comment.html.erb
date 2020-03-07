@@ -11,8 +11,7 @@
       </td>
     <td width="135">
       <% if comment.end_user == current_end_user %>
-      <%# teammate_recruitmentのidとcommentのidを両方渡している。 %>
-        <%= link_to "コメントを消す", teammate_recruitment_teammate_comment_path(comment.teammate_recruitment_id,comment.id), method: :delete,remote:true, class:"btn-sm btn-danger" %>
+        <%= link_to "コメントを消す", matchmake_matchmake_comment_path(comment.matchmake_id,comment.id), method: :delete,remote: true , class:"btn-sm btn-danger" %>
       <% end %>
     </td>
   </tr>

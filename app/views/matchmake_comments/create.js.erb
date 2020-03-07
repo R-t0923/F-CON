@@ -1,0 +1,2 @@
+$("textarea").val("");
+$("#comment_<%= @matchmake.id %>").html("<%= j(render 'matchmake_comments/comment', comments: @comments ) %>");

@@ -51,7 +51,7 @@ class MatchmakesController < ApplicationController
   def show
     @matchmake = Matchmake.find(params[:id])
     @comment = MatchmakeComment.new
-    @comments = @matchmake.matchmake_comments.order(created_at: :desc).page(params[:page]).per(5) 
+    @comments = @matchmake.matchmake_comments.order(created_at: :desc).page(params[:page]).per(8) 
   end
 
   def destroy

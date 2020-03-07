@@ -2,6 +2,7 @@ class TeammateRecruitmentsController < ApplicationController
   before_action :authenticate_end_user!,except: [:index, :show]
   # ユーザー本人しか下記のアクションを行えないようにする
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
+
   def index
     # 新しい順に上から表示（降順）,８投稿毎にページをかえる
     @teammate_recruitments = TeammateRecruitment.all.order(created_at: :desc).page(params[:page]).per(8) 
@@ -51,7 +52,7 @@ class TeammateRecruitmentsController < ApplicationController
   def show
     @teammate_recruitment = TeammateRecruitment.find(params[:id])
     @comment = TeammateComment.new
-    @comments = @teammate_recruitment.teammate_comments.order(created_at: :desc).page(params[:page]).per(5) 
+    @comments = @teammate_recruitment.teammate_comments.order(created_at: :desc).page(params[:page]).per(8) 
   end
 
   def destroy

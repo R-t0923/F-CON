@@ -35,7 +35,8 @@
         <tr>
           <td>
           <%# コメント機能 %>
-            <%= form_for [@teammate_recruitment, @comment] ,remote:true do |f| %>
+            <%# remote: trueでjsのリクエストを送信する %>
+            <%= form_for [@teammate_recruitment, @comment] ,remote: true do |f| %>
               <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
               <%= f.submit "送信する", class: "btn btn-sm" %>
             <% end %>
@@ -96,7 +97,7 @@
       <td><%= simple_format(@teammate_recruitment.introduction) %></td>    </table>
   </div>
 </div>
-
+<div >
 <% if end_user_signed_in?%>
   <div class="row">
     <h2>コメント一覧</h2>
@@ -110,7 +111,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody class="show-tb comment_<%= @teammate_recruitment.id %>">
+        <tbody id="comment_<%= @teammate_recruitment.id %>">
           <%= render 'teammate_comments/comment', comments: @comments %>
         </tbody>
       </table>
