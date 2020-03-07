@@ -47,12 +47,14 @@
     </table>
   </div>
   <div class="col-6">
-  <span>投稿日： <%= @teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></span>
-  <%# ログインしてないユーザーの場合表示しない %>
-  <%# いいね機能 %>
-    <div id="favorites_buttons_<%= @teammate_recruitment.id %>">
+  <div>
+    投稿日： <%= @teammate_recruitment.created_at.strftime("%Y年%m月%d日") %>
+    <%# ログインしてないユーザーの場合表示しない %>
+    <%# いいね機能 %>
+    <span id="favorites_buttons_<%= @teammate_recruitment.id %>">
       <%= render partial: 'teammate_favorites/favorites_button', locals: {teammate_recruitment: @teammate_recruitment} %>
-    </div>
+    </span>
+  </div>
   <%# ログインしていないユーザーはここまで表示しない %>
   <h4><%= @teammate_recruitment.title%></h4>
     <table class="table table-bordered">

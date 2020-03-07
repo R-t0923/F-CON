@@ -1,6 +1,6 @@
 <!-- ログインしているユーザーのヘッダー -->
 <% if end_user_signed_in?%>
-  <ul class="nav navber">
+  <ul class="nav navber justify-content-center ">
     <li>
       <%= link_to "会員一覧", users_path, style:"color:#FFF;",class:"nav-link"%>
     </li>
@@ -17,7 +17,7 @@
       
 <!-- ログインしてないユーザー -->
 <% else %>
-  <ul class="nav navber">
+  <ul class="nav navber justify-content-center ">
     <li>
       <%= link_to "初めての方へ", about_path, style:"color:#FFF;", class: "nav-link" %>
     </li>

@@ -67,9 +67,8 @@ class MatchmakesController < ApplicationController
 
   def ensure_correct_user
     @group = Group.find_by(id: params[:group_id])
-    if @group.end_user_id != current_end_user.id 
+    if @group.end_user_id != current_end_user.id && current_end_user.admin == false
       redirect_to root_path
     end
   end
 end
-# || current_end_user.admin == false
