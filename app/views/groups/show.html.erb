@@ -13,7 +13,16 @@
           <strong>チーム作成者：</strong>
           <%= link_to user_path(@group.end_user) do %>
             <%= @group.end_user.nick_name %>
+          <% end %><br>
+          <strong>所属メンバー：</strong>
+          <%= link_to group_menber_index_path(@group) do %>
+            <%= @menbers%>人
           <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          
         </td>
       </tr>
       <%# ログインしてないユーザーの場合表示しない %>
@@ -37,11 +46,20 @@
           </tr>
           <tr>
             <td>
-              <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %><br>
+              <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
               <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-primary btn-sm btn-block"  %>
             </td>
           </tr>
           <% else %>
+          <tr>
+            <td>
+              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-primary btn-sm btn-block"  %>
+            </td>
+          </tr>
           <tr>
             <td>
             <%# チーム参加、脱退機能 %>
@@ -53,16 +71,11 @@
           </tr>
         <% end %>
       <% end %>
-      <tr>
-          <td>
-            <%= link_to "所属メンバー",group_menber_index_path(@group),class: "btn btn-info btn-sm btn-block" %>
-          </td>
-        </tr>
       <%# ここまで %>
     </table>
   </div>
   <div class="col-6">
-    <table class="table table-bordered">
+    <table class="group_table table table-bordered">
       <tr>
         <th>チーム名</th>
         <td><%= @group.name %></td>

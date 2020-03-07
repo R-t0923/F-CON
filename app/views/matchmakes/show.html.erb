@@ -47,12 +47,14 @@
     </table>
   </div>
   <div class="col-6">
-  <span>投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %></span>
+  <div>
+    投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %>
   <%# ログインしてないユーザーの場合表示しない %>
     <%# いいね機能 %>
-    <div id="favorites_buttons_<%= @matchmake.id %>">
+    <span id="favorites_buttons_<%= @matchmake.id %>">
       <%= render partial: 'matchmake_favorites/favorites_button', locals: {matchmake: @matchmake} %>
-    </div>
+    </span>
+  </div>
     <%# いいね機能ここまで %>
   <%# ログインしていないユーザーはここまで表示しない %>
   <h4><%= @matchmake.title%></h4>

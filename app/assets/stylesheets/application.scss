@@ -36,6 +36,7 @@ header {
 
 .drawer {
   font-family: 'Noto Sans JP', sans-serif;
+  background-color: #EEEEEE	;
 }
 
 body,
@@ -80,3 +81,11 @@ header_link:link {color:white; text-decoration:none}
 header_link:visited {color:white; text-decoration:none}
 header_link.hover {color:white; text-decoration:none}
 header_link:active {color:white; text-decoration:none}
+
+.user_table {
+  margin-top: 18px;
+} 
+
+.group_table {
+  margin-top: 11px;
+}

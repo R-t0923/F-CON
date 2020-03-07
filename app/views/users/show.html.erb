@@ -31,11 +31,26 @@
     </table>
   </div>
   <div class="col-6">
-    <table class="table table-bordered">
+    <table class="user_table table table-bordered">
       <tr>
         <th>ニックネーム</th>
         <td><%= @user.nick_name %></td>
       </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
+      <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
+        <% if @user == current_end_user || current_end_user.admin? %>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @user.phone_number %></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <%# ここまで %>
       <tr>
         <th>性別</th>
         <td><%= @user.gender %></td>
