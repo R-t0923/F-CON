@@ -35,7 +35,8 @@
         <tr>
           <td>
           <%# コメント機能 %>
-            <%= form_for [@matchmake, @comment] do |f| %>
+            <%# remote: trueでjsのリクエストを送信する %>
+            <%= form_for [@matchmake, @comment], remote: true do |f| %>
               <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
               <%= f.submit "送信する", class: "btn btn-sm" %>
             <% end %>
@@ -109,26 +110,8 @@
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <% @comments.each do |comment| %>
-            <tr>
-              <td width="160">
-                <%= comment.end_user.nick_name %>
-              </td>
-              <td width="250">
-                <%= simple_format(comment.comment) %>
-              </td>
-              <td width="160">
-                <%= comment.created_at.strftime("%Y年%m月%d日") %>
-                </td>
-              <td width="135">
-                <% if comment.end_user == current_end_user %>
-                <%# matchmakeのidとcommentのidを両方渡している。 %>
-                  <%= link_to "コメントを消す", matchmake_matchmake_comment_path(@matchmake,comment.id), method: :delete, class:"btn-sm btn-danger" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
+        <tbody id="comment_<%= @matchmake.id %>">
+          <%= render 'matchmake_comments/comment', comments: @comments %>
         </tbody>
       </table>
       <%= paginate @comments, class: "paginate" %>

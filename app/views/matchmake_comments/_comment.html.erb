@@ -1,0 +1,18 @@
+<% comments.each do |comment| %>
+  <tr>
+    <td width="160">
+      <%= comment.end_user.nick_name %>
+    </td>
+    <td width="250">
+      <%= simple_format(comment.comment) %>
+    </td>
+    <td width="160">
+      <%= comment.created_at.strftime("%Y年%m月%d日") %>
+      </td>
+    <td width="135">
+      <% if comment.end_user == current_end_user %>
+        <%= link_to "コメントを消す", matchmake_matchmake_comment_path(comment.matchmake_id,comment.id), method: :delete,remote: true , class:"btn-sm btn-danger" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
