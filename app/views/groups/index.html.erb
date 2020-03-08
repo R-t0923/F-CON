@@ -1,4 +1,4 @@
-<h2>チーム一覧</h2>
+<h2 class="mt-5">チーム一覧</h2>
 <%# 絞り込み機能%>
 <div class="row">
   <div class = "col-6">
@@ -30,6 +30,7 @@
 <%# 絞り込み機能ここまで%>
 <div class="row">
   <div class="col-10 offset-1">
+    表示件数：<%= @groups.count%>件
     <table class="table">
       <thead>
         <tr>
@@ -41,22 +42,26 @@
           <th></th>
         </tr>
       </thead>
-      <% @groups.each do |group|%>
-        <tbody>
-          <tr>
-            <td>
-              <%= attachment_image_tag group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image2.jpg"%>
-            </td>
-            <td><%= group.name %></td>
-            <td><%= group.city %></td>
-            <td><%= group.category %></td>
-            <td><%= group.level %></td>
-            <td>
-            <%= link_to "チーム詳細へ", group_path(group.id) %>
-            </td>
-          </tr>
-        </tbody>
-      <% end %>
+      <% if  @groups.present? %>
+        <% @groups.each do |group|%>
+          <tbody>
+            <tr>
+              <td>
+                <%= attachment_image_tag group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image2.jpg"%>
+              </td>
+              <td><%= group.name %></td>
+              <td><%= group.city %></td>
+              <td><%= group.category %></td>
+              <td><%= group.level %></td>
+              <td>
+              <%= link_to "チーム詳細へ", group_path(group.id),class: "nav-link" %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      <% else %>
+        <h4>検索結果はありません</h4>
+    <% end %>
     </table>
     <%= paginate @groups, class: "paginate" %>
   </div>

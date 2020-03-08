@@ -1,4 +1,4 @@
-<h2>マッチメイク募集一覧</h2>
+<h2 class="mt-5">マッチメイク募集一覧</h2>
 <%# 絞り込み検索 %>
 <div class="row">
   <div class = "col-8">
@@ -34,10 +34,14 @@
   </div>
 </div>
 <%# 絞り込み検索ここまで %>
-
+表示件数：<%= @matchmakes.count%>件
 <div class ="row">
-  <% @matchmakes.each do |matchmake|%>
-    <%=render "matchmake_index", matchmake: matchmake%>
+  <% if @matchmakes.present? %>
+    <% @matchmakes.each do |matchmake|%>
+      <%=render "matchmake_index", matchmake: matchmake%>
+    <% end %>
+  <% else %>
+    　<h4>検索結果はありません</h4>
   <% end %>
   <%= paginate @matchmakes, class: "paginate" %>
 </div>

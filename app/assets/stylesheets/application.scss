@@ -48,7 +48,12 @@ body,
  
 
 footer {
-  margin-top: auto;
+  text-align: center;
+  padding: 26px 0;
+}
+
+footer p {
+  font-size : 0.875rem;
 }
 
 .background_image {
@@ -89,3 +94,19 @@ header_link:active {color:white; text-decoration:none}
 .group_table {
   margin-top: 11px;
 }
+
+.image {
+  text-align: center;
+  width: 100%;
+}
+
+
+a.nav-link:link { color: #AAAAAA; }
+a.nav-link:visited { color: #888888; }
+a.nav-link:hover { color: #555555	; }
+a.nav-link:active { color: #222222; }
+
+a.link:link { color: #AAAAAA; }
+a.link:visited { color: #888888; }
+a.link:hover { color: #555555	; }
+a.link:active { color: #222222; }

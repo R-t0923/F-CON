@@ -1,4 +1,4 @@
-<h2>会員一覧</h2>
+<h2 class="mt-5">会員一覧</h2>
 <%#　絞り込み機能%>
 <div class="row">
   <div class = "col-4">
@@ -25,6 +25,7 @@
 <%# 絞り込み機能ここまで%>
 <div class="row">
   <div class="col-10 offset-1">
+      表示件数：<%= @users.count%>件
     <table class="table">
         <thead>
           <tr>
@@ -36,21 +37,25 @@
             <th></th>
           </tr>
         </thead>
-      <% @users.each do |user| %>
-        <tbody>
-          <tr>
-            <td>
-              <%= attachment_image_tag user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
-            </td>
-            <td><%= user.nick_name%></td>
-            <td><%= user.age%></td>
-            <td><%= user.fotsal_experience %>年</td>
-            <td><%= user.soccer_experience %>年</td>
-            <td>
-              <%= link_to "会員詳細へ", user_path(user.id) %>
-            </td>
-          </tr>
-        </tbody>
+        <% if  @users.present? %>
+          <% @users.each do |user| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= attachment_image_tag user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+                </td>
+                <td><%= user.nick_name%></td>
+                <td><%= user.age%></td>
+                <td><%= user.fotsal_experience %>年</td>
+                <td><%= user.soccer_experience %>年</td>
+                <td>
+                  <%= link_to "会員詳細へ", user_path(user.id),class: "nav-link" %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% else %>
+          <h4>検索結果はありません</h4>
       <% end %>
     </table>
     <%= paginate @users, class: "paginate" %>

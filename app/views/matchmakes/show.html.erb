@@ -4,32 +4,40 @@
   <div class="col-4 offset-1">
     <table class="table table-borderless">
       <tr>
-        <td>
-    <%= attachment_image_tag @matchmake.group, :group_image, size: "300x250", format: 'jpeg', fallback: "no_image2.jpg"%>
+        <td class="image">
+          <%= attachment_image_tag @matchmake.group, :group_image, format: 'jpeg', fallback: "no_image2.jpg"%>
         </td>
       </tr>
       <tr>
         <td>
           <strong>チーム名：</strong>
-          <%= link_to group_path(@matchmake.group.id) do %>
+          <%= link_to group_path(@matchmake.group.id),class: "link" do %>
             <%= @matchmake.group.name %>
           <% end %>
         </td>
       </tr>
       <%# ログインしてないユーザーの場合表示しない %>
       <% if end_user_signed_in?%>
-        <%# group_idとgroup.idが一緒なら表示 %>
-        <% if @matchmake.group.end_user_id == current_end_user.id || current_end_user.admin? %>
+        <%# group_idとgroup.idが一緒のユーザーであれば表示 %>
+        <% if @matchmake.group.end_user_id == current_end_user.id %>
           <tr>
             <td>
-              <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-primary btn-sm btn-block" %>
+              <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
             </td>
           </tr>
           <tr>
             <td>
-              <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+              <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
             </td>
           </tr>
+          <%# ログインユーザーがAdminなら以下の情報が表示 %>
+          <% elsif current_end_user.admin == true %>
+            <tr>
+              <td>
+                <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+              </td>
+          </tr>
+          <% else current_end_user.admin == false%>
         <% end %>
         <%# ここまで %>
         <tr>
@@ -37,8 +45,10 @@
           <%# コメント機能 %>
             <%# remote: trueでjsのリクエストを送信する %>
             <%= form_for [@matchmake, @comment], remote: true do |f| %>
-              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-              <%= f.submit "送信する", class: "btn btn-sm" %>
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
+              <div class="text-right">
+                <%= f.submit "送信する", class: "btn btn-sm btn-outline-primary " %>
+              </div>
             <% end %>
           <%# コメント機能　ここまで %>
           </td>

@@ -20,12 +20,12 @@ class EndUser < ApplicationRecord
 
   # ニックネームによる絞り込み
   scope :get_by_nick_name, ->(nick_name) {
-    where("nick_name like ?", "%#{nick_name}%")
-    }
+  where("nick_name like ?", "%#{nick_name}%")
+  }
     # 年齢による絞り込み
-    scope :get_by_age, ->(age) {
-    where(age: age)
-    }
+  scope :get_by_age, ->(age) {
+  where(age: age)
+  }
     
   validates :nick_name, presence: true, length: {maximum: 15 }
   #ハイフン込みで電話番号を入力

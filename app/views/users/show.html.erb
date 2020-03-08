@@ -1,31 +1,43 @@
 <p id="notice"><%= notice %></p>
-<h2>マイページ</h2>
+<% if @user == current_end_user %>
+  <h2 >マイページ</h2>
+<% else  %>
+  <h2><%= @user.nick_name%>さんのページ</h2>
+<% end %>
 <div class="row">
   <div class="col-4 offset-1">
     <table class="table table-borderless">
       <tr>
-        <td>
-        <%= attachment_image_tag @user, :user_image, size: "300x250", format: 'jpeg', fallback: "no_image.jpg"%>
+        <td class="image">
+        <%= attachment_image_tag @user, :user_image, format: 'jpeg', fallback: "no_image.jpg" %>
         </td>
       </tr>
       <%# ログインしてないユーザーの場合表示しない %>
       <% if end_user_signed_in?%>
       <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
-        <% if @user == current_end_user || current_end_user.admin? %>
-        <tr>
-          <td>
-            <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-primary btn-sm btn-block" %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
-          <td>
-        </tr>
-        <tr>
-          <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-success btn-sm btn-block"%></td><br>
-        </tr>
+        <% if @user == current_end_user %>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に退会しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            <td>
+          </tr>
+          <tr>
+            <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-outline-success btn-sm btn-block"%></td><br>
+          </tr>
+        <%# ログインユーザーがAdminなら以下の情報が表示 %>
+        <% elsif current_end_user.admin == true %>
+          <tr>
+            <td>
+              <%= link_to "削除する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            <td>
+          </tr>
         <% end %>
+        <% else current_end_user.admin == false%>
       <% end %>
       <%# ここまで %>
     </table>

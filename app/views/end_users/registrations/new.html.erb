@@ -1,6 +1,6 @@
-<h2>新規登録</h2>
 <div class="row">
   <div class="col-4 offset-4">
+    <h2 class="mt-5">新規登録</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
     <table>
@@ -68,11 +68,11 @@
           </div>
         </td>
       </tr>
-
+      <tr><td>　</td></tr>
       <tr>
         <td>
           <div class="actions">
-            <%= f.submit "登録する" ,class:"btn btn-warning btn-sm btn-block" %>
+            <%= f.submit "登録する" ,class:"btn btn-outline-warning btn-sm btn-block" %>
           </div>
         </td>
       </tr>
