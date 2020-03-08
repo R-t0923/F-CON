@@ -6,10 +6,9 @@
           </td>
           
           <td>
-            <%= link_to teammate_recruitment_path(teammate_recruitment.id) do%>
-              <strong><%= teammate_recruitment.title%></strong><br>
+            <%= link_to teammate_recruitment_path(teammate_recruitment.id),class: "link" do%>
+                <strong><%= teammate_recruitment.title%></strong><br>
             <% end %>
-
             <strong>チーム名　　</strong><%= teammate_recruitment.group.name %><br>
             <strong>カテゴリー　</strong><%= teammate_recruitment.group.category %><br>
             <strong>募集メンバー　</strong><%= teammate_recruitment.level %><br>

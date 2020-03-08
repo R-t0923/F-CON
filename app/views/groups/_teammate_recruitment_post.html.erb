@@ -1,4 +1,4 @@
-<h2>メンバー募集投稿一覧</h2>
+<h2 class="mt-5">メンバー募集投稿一覧</h2>
 <div class="row">
   <div class="col-8 offset-2">
     <table class="table">
@@ -18,10 +18,10 @@
             </td>
             <td ><%= teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></td>
             <td >
-              <%= link_to "詳細へ", teammate_recruitment_path(teammate_recruitment.id) %>
+              <%= link_to "詳細へ", teammate_recruitment_path(teammate_recruitment.id),class: "nav-link" %>
             </td>
             <td>
-              <%= link_to "投稿を削除する", group_teammate_recruitment_path(teammate_recruitment.group,teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm " %>
+              <%= link_to "投稿を削除する", group_teammate_recruitment_path(teammate_recruitment.group,teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm " %>
             </td>
           </tr>
         </tbody>

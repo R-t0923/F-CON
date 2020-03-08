@@ -6,7 +6,7 @@
           </td>
           
           <td>
-            <%= link_to matchmake_path(matchmake.id) do%>
+            <%= link_to matchmake_path(matchmake.id),class: "link" do%>
               <strong><%= matchmake.title%></strong><br>
             <% end %>
             <strong>チーム名　　　　</strong><%= matchmake.group.name %><br>

@@ -30,7 +30,7 @@
               <%= favorite.teammate_recruitment.created_at.strftime("%Y年%m月%d日") %>
             </td>
             <td>
-              <%= link_to "詳細へ", teammate_recruitment_path(favorite.teammate_recruitment_id) %>
+              <%= link_to "詳細へ", teammate_recruitment_path(favorite.teammate_recruitment_id) ,class: "nav-link"%>
             </td>
           </tr>
         </tbody>

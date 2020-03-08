@@ -28,7 +28,7 @@
             </td>
             <td><%= join_group.created_at.strftime("%Y年%m月%d日") %></td>
             <td>
-              <%= link_to "詳細へ", group_path(join_group.group.id) %>
+              <%= link_to "詳細へ", group_path(join_group.group.id) ,class: "nav-link"%>
             </td>
           </tr>
         </tbody>

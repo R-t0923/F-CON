@@ -4,18 +4,18 @@
   <div class="col-4 offset-1">
     <table class="table table-borderless">
       <tr>
-        <td>
-        <%= attachment_image_tag @group, :group_image, size: "300x250", format: 'jpeg', fallback: "no_image2.jpg"%>
+        <td class="image">
+        <%= attachment_image_tag @group, :group_image, format: 'jpeg', fallback: "no_image2.jpg"%>
         </td>
       </tr>
       <tr>
         <td>
           <strong>チーム作成者：</strong>
-          <%= link_to user_path(@group.end_user) do %>
+          <%= link_to user_path(@group.end_user),class: "link" do %>
             <%= @group.end_user.nick_name %>
           <% end %><br>
           <strong>所属メンバー：</strong>
-          <%= link_to group_menber_index_path(@group) do %>
+          <%= link_to group_menber_index_path(@group),class: "link" do %>
             <%= @menbers%>人
           <% end %>
         </td>
@@ -28,36 +28,43 @@
       <%# ログインしてないユーザーの場合表示しない %>
       <% if end_user_signed_in?%>
       <%# group作成者のend_user_idとログインユーザーidが一緒なら表示 %>
-        <% if @group.end_user_id == current_end_user.id || current_end_user.admin? %>
+        <% if @group.end_user_id == current_end_user.id %>
           <tr>
             <td>
-              <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-primary btn-sm btn-block" %>
+              <%= link_to "編集する",edit_group_path(@group) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
             </td>
           </tr>
           <tr>
             <td>
-              <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-danger btn-sm btn-block" %>
+              <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
             </td>
           </tr>
           <tr>
             <td>
-              <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-success btn-sm btn-block"%>
+              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-outline-primary btn-sm btn-block"  %>
             </td>
           </tr>
           <tr>
             <td>
-              <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-success btn-sm btn-block" %>
+              <%= link_to "マッチメイクを募集する", new_group_matchmake_path(@group) ,class: "btn btn-outline-success btn-sm btn-block"%>
             </td>
           </tr>
           <tr>
             <td>
-              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-primary btn-sm btn-block"  %>
+              <%= link_to "新メンバーを募集する", new_group_teammate_recruitment_path(@group),class: "btn btn-outline-success btn-sm btn-block" %>
             </td>
           </tr>
+          <%# ログインユーザーがAdminなら以下の情報が表示 %>
+          <% elsif current_end_user.admin == true %>
+            <tr>
+              <td>
+                <%= link_to "チームを削除する", group_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+              </td>
+            </tr>
           <% else %>
           <tr>
             <td>
-              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-primary btn-sm btn-block"  %>
+              <%= link_to "投稿一覧", group_post_index_path(@group),class: "btn btn-outline-primary btn-sm btn-block"  %>
             </td>
           </tr>
           <tr>

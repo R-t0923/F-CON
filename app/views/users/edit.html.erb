@@ -1,4 +1,4 @@
-<h2>登録情報編集</h2>
+<h2 class="mt-5">登録情報編集</h2>
 
 <%= form_for @user, url: user_path do |f| %>
 <%= render 'layouts/error_messages', record: @user %>
@@ -10,59 +10,59 @@
     <div class="col-7">
       <table class="table">
         <tr>
-          <td>ニックネーム</td>
+          <th>ニックネーム</th>
           <td><%= f.text_field :nick_name, placeholder:"FCON太郎(10文字以内)",size: 25 %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
+          <th>電話番号</th>
             <td>
               <%= f.telephone_field :phone_number, placeholder: "090-1234-5678(ハイフン)", size: 25 %>
             </td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
+          <th>メールアドレス</th>
             <td>
               <%= f.email_field :email, placeholder: "fcon@fmail.com", size: 25 %>
             </td>
         </tr>
         <tr>
-          <td>性別</td>
+          <th>性別</th>
             <td>
               <%= f.select :gender, EndUser.genders.keys.to_a, {}  %>
             </td>
         </tr>
         <tr>
-          <td>年齢</td>
+          <th>年齢</th>
             <td>
               <%= f.select :age, EndUser.ages.keys.to_a, {} %>
             </td>
         </tr>
         <tr>
-          <td>フットサル経験</td>
+          <th>フットサル経験</th>
             <td>
               <%= f.number_field :fotsal_experience, min: 0 ,max:99%>年
             </td>
         </tr>
         <tr>
-          <td>サッカー経験</td>
+          <th>サッカー経験</th>
             <td>
               <%= f.number_field :soccer_experience,min: 0 ,max:99 %>年
             </td>
         </tr>
         <tr>
-          <td>自己紹介etc</td>
+          <th>自己紹介etc</th>
           <td>
-          <%= f.text_area :introduction, placeholder:"こんにちは！！(任意）",size: "50*50" %>
+            <%= f.text_area :introduction, placeholder:"こんにちは！！(任意）",size: "50*50" %>
           </td>
         </tr>
         <tr>
-        <td></td>
-        <td>
-          <div class="actions">
-            <%= f.submit "登録する" ,class:"btn btn-primary btn-sm btn-block" %>
-          </div>
-        </td>
-      </tr>
+          <th></th>
+          <td>
+            <div class="actions">
+              <%= f.submit "登録する" ,class:"btn btn-outline-primary btn-sm btn-block" %>
+            </div>
+          </td>
+        </tr>
       </table>
     </div>
   </div>

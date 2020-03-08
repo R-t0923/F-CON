@@ -4,7 +4,7 @@
     <div class="col-8 offset-2">
       <table class="table">
         <tr>
-          <th width="190">チーム名</th>
+          <th>チーム名</th>
           <td>
             <%= f.text_field :name, placeholder:"チームFCON(20文字以内)",size: 45 %>
           </td>
@@ -53,14 +53,14 @@
         <tr>
           <th>チーム紹介</th>
           <td>
-            <%= f.text_area :group_introduction, placeholder:"こんにちは！！" ,size: "45*100"%>
+            <%= f.text_area :group_introduction, placeholder:"こんにちは！！" ,size: "45*45"%>
           </td>
         </tr>
         <tr>
-        <td></td>
+        <th></th>
         <td>
           <div class="actions">
-            <%= f.submit "登録する" ,class:"btn btn-primary btn-sm w-75" %>
+            <%= f.submit "登録する" ,class:"btn btn-outline-primary btn-sm w-75 " %>
           </div>
         </td>
         </tr>

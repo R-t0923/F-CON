@@ -34,8 +34,8 @@ class Group < ApplicationRecord
   validates :category, presence: true
   validates :level, presence: true
   # 半角数字のみ
-  validates :male_member, presence: true, format: { with:/\A[0-9]+\z/}
-  validates :female_member, presence: true, format: { with:/\A[0-9]+\z/}
-  validates :average_age, presence: true, format: { with:/\A[0-9]+\z/}
+  validates :male_member, format: { with:/\A[0-9]+\z/}
+  validates :female_member, format: { with:/\A[0-9]+\z/}
+  validates :average_age, format: { with:/\A[0-9]+\z/}
   validates :group_introduction, presence: true,length: {maximum: 1000 }
 end

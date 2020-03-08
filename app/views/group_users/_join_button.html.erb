@@ -1,10 +1,10 @@
 <% if group.join_by?(current_end_user) %>
-  <%= link_to   group_group_users_path(group),class:"btn btn-danger btn-sm btn-block", method: :delete, remote: true do %>
+  <%= link_to   group_group_users_path(group),class:"btn btn-outline-danger btn-sm btn-block", method: :delete, remote: true do %>
     <i  aria-hidden="true" ></i>
     <%= "チームから抜ける" %>
   <% end %>
 <% else %>
-  <%= link_to  group_group_users_path(group),class:"btn btn-success btn-sm btn-block", method: :post, remote: true do %>
+  <%= link_to  group_group_users_path(group),class:"btn btn-outline-success btn-sm btn-block", method: :post, remote: true do %>
     <i  aria-hidden="true" ></i>
     <%= "チームに参加する" %> 
   <% end %>
