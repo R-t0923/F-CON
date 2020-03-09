@@ -6,7 +6,6 @@ class CreateTeammates < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.string :money, null: false
       t.integer :level, null: false
-      t.boolean :on_recruit, null: false, default: true
       t.text :introduction, null: false
 
       t.timestamps

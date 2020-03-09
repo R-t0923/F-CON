@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 2020_03_02_115055) do
     t.text "introduction"
     t.string "user_image_id"
     t.datetime "deleted_at"
-    t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
@@ -103,7 +102,6 @@ ActiveRecord::Schema.define(version: 2020_03_02_115055) do
     t.integer "category", null: false
     t.integer "capacity", null: false
     t.integer "level", null: false
-    t.integer "on_recruit", default: 1, null: false
     t.text "introduction", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -130,7 +128,6 @@ ActiveRecord::Schema.define(version: 2020_03_02_115055) do
     t.string "title", null: false
     t.string "money", null: false
     t.integer "level", null: false
-    t.boolean "on_recruit", default: true, null: false
     t.text "introduction", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
