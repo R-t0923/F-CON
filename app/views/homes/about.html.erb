@@ -3,7 +3,7 @@
   <h2 class="text-center">＜＜初めての方へ＞＞</h2>
 
   <section class="about_section">
-  <h4>F/CONとは？</h4>
+  <h4 class="about">F/CONとは？</h4>
   <p>
     東京都23区限定のフットサルマッチングサイトです。<br>
 
@@ -18,7 +18,7 @@
   </section>
 
   <section class="about_section">
-  <h4>マッチメイクとは？</h4>
+  <h4 class="about">マッチメイクとは？</h4>
   <p>
     試合相手の募集ができる機能です。<br>
     試合相手の内容をレベルやカテゴリー別に選択して、募集をする事ができます。<br>
@@ -29,7 +29,7 @@
   </section>
 
   <section class="about_section">
-  <h4>メンバー募集とは？</h4>
+  <h4 class="about">メンバー募集とは？</h4>
   <p>
     新しいチームメイトを募集ができる機能です。<br>
     チームメイトを地域やカテゴリー別に選択して、募集、参加をする事ができます。<br>
@@ -40,11 +40,13 @@
   </section>
 
   <section class="about_section">
-  <h4>利用するには？</h4>
+  <h4 class="about">利用するには？</h4>
   <p>
     F/CONのサービスは全て無料ですが、閲覧以外のサービスは会員登録が必要です。<br>
   </p>
-  <%= link_to "新規登録はこちら", new_end_user_registration_path, class: "btn-sm btn-primary " %>
   </section>
 
 </article>
+<div class="row">
+<%= link_to "新規登録はこちら", new_end_user_registration_path, class: "home-btn btn-sm btn-primary mx-auto d-block" %>
+</div>

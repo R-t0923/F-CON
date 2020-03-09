@@ -1,4 +1,4 @@
-<h2 class="mt-5">登録情報編集</h2>
+<h2 class="mt-5 mb-4">登録情報編集</h2>
 
 <%= form_for @user, url: user_path do |f| %>
 <%= render 'layouts/error_messages', record: @user %>
@@ -11,18 +11,18 @@
       <table class="table">
         <tr>
           <th>ニックネーム</th>
-          <td><%= f.text_field :nick_name, placeholder:"FCON太郎(10文字以内)",size: 25 %></td>
+          <td><%= f.text_field :nick_name, placeholder:"FCON太郎(10文字以内)",size: 30%></td>
         </tr>
         <tr>
           <th>電話番号</th>
             <td>
-              <%= f.telephone_field :phone_number, placeholder: "090-1234-5678(ハイフン)", size: 25 %>
+              <%= f.telephone_field :phone_number, placeholder: "090-1234-5678(ハイフン)", size: 30%>
             </td>
         </tr>
         <tr>
           <th>メールアドレス</th>
             <td>
-              <%= f.email_field :email, placeholder: "fcon@fmail.com", size: 25 %>
+              <%= f.email_field :email, placeholder: "fcon@fmail.com", size: 30%>
             </td>
         </tr>
         <tr>
@@ -52,18 +52,13 @@
         <tr>
           <th>自己紹介etc</th>
           <td>
-            <%= f.text_area :introduction, placeholder:"こんにちは！！(任意）",size: "50*50" %>
-          </td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <div class="actions">
-              <%= f.submit "登録する" ,class:"btn btn-outline-primary btn-sm btn-block" %>
-            </div>
+            <%= f.text_area :introduction, placeholder:"こんにちは！！(任意）",size: "30*30" %>
           </td>
         </tr>
       </table>
+      <div class="actions text-center">
+        <%= f.submit "　　登 録 す る　　" ,class:"btn btn-outline-primary btn-sm " %>
+      </div>
     </div>
   </div>
 <% end %>

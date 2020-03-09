@@ -20,9 +20,12 @@
             <td >
               <%= link_to "詳細へ", matchmake_path(matchmake.id),class: "nav-link" %>
             </td>
-            <td>
-              <%= link_to "投稿を削除する", group_matchmake_path(matchmake.group,matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm " %>
-            </td>
+            <%# 現在のログインユーザーがグループ作成者であれば以下を表示 %>
+            <% if matchmake.group.end_user_id == current_end_user.id %>
+              <td>
+                <%= link_to "投稿を削除する", group_matchmake_path(matchmake.group,matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm " %>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       <% end %>

@@ -64,7 +64,7 @@ class GroupsController < ApplicationController
   end
 
   def post_index 
-    @group = Group.find_by(end_user_id: current_end_user.id)
+    @group = Group.find(params[:group_id])
     @matchmakes = Matchmake.where(group_id: @group).order(created_at: :desc).page(params[:page]).per(8)
     @teammate_recruitments = TeammateRecruitment.where(group_id: @group).order(created_at: :desc).page(params[:page]).per(8)
   end

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 <% if @user == current_end_user %>
-  <h2 >マイページ</h2>
+  <h2 class="mt-5">マイページ</h2>
 <% else  %>
-  <h2><%= @user.nick_name%>さんのページ</h2>
+  <h2 class="mt-5"><%= @user.nick_name%>さんのページ</h2>
 <% end %>
 <div class="row">
   <div class="col-4 offset-1">
@@ -36,8 +36,8 @@
               <%= link_to "削除する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
             <td>
           </tr>
-        <% end %>
         <% else current_end_user.admin == false%>
+        <% end %>
       <% end %>
       <%# ここまで %>
     </table>
@@ -73,11 +73,11 @@
       </tr>
       <tr>
         <th>フットサル経験</th>
-        <td><%= @user.fotsal_experience %></td>
+        <td><%= @user.fotsal_experience %>年</td>
       </tr>
       <tr>
         <th>サッカー経験</th>
-        <td><%= @user.soccer_experience %></td>
+        <td><%= @user.soccer_experience %>年</td>
       </tr>
     </table>
     <table class="table table-bordered">
