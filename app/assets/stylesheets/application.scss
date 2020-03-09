@@ -82,6 +82,13 @@ footer p {
   margin: 25px;
 }
 
+.about {
+  padding-left:20px;
+  border-radius: 20px;
+  background-color:#343a40; 
+  color:#fff;
+}
+
 header_link:link {color:white; text-decoration:none}
 header_link:visited {color:white; text-decoration:none}
 header_link.hover {color:white; text-decoration:none}
@@ -110,3 +117,7 @@ a.link:link { color: #AAAAAA; }
 a.link:visited { color: #888888; }
 a.link:hover { color: #555555	; }
 a.link:active { color: #222222; }
+
+.actions.text-center {
+  margin-top: -10px;
+}

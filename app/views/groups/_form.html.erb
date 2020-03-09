@@ -46,25 +46,22 @@
             <%= f.number_field :average_age, min: 0 ,max:99%>歳
           </td>
         </tr>
-        <th>チーム画像</th>
-        <td>
-          <%= f.attachment_field :group_image, placeholder: "画像選択" %>
-        </td>
+        <tr>
+          <th>チーム画像</th>
+          <td>
+            <%= f.attachment_field :group_image, placeholder: "画像選択" %>
+          </td>
+        </tr>
         <tr>
           <th>チーム紹介</th>
           <td>
             <%= f.text_area :group_introduction, placeholder:"こんにちは！！" ,size: "45*45"%>
           </td>
         </tr>
-        <tr>
-        <th></th>
-        <td>
-          <div class="actions">
-            <%= f.submit "登録する" ,class:"btn btn-outline-primary btn-sm w-75 " %>
-          </div>
-        </td>
-        </tr>
       </table>
+      <div class="actions text-center">
+        <%= f.submit "　　登 録 す る　　" ,class:"btn btn-outline-primary btn-sm " %>
+      </div>
     </div>
   </div>
 <% end %>
