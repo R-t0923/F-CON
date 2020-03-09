@@ -10,7 +10,6 @@ class CreateMatchmakes < ActiveRecord::Migration[5.2]
       t.integer :category, null: false
       t.integer :capacity, null: false
       t.integer :level, null: false
-      t.integer :on_recruit, null: false, default: true
       t.text :introduction, null: false
 
       t.timestamps
