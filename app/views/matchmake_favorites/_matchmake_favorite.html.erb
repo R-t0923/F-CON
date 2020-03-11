@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>投稿タイトル</th>
+          <th>募集カテゴリー</th>
+          <th>募集レベル</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @matchmake_favorites.each do |favorite| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag favorite.matchmake.group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+            </td>
+            <td>
+              <%= favorite.matchmake.title %>
+            </td>
+            <td>
+              <%= favorite.matchmake.category %>
+            </td>
+            <td>
+              <%= favorite.matchmake.level %>
+            </td>
+            <td>
+              <%= favorite.matchmake.created_at.strftime("%Y年%m月%d日") %>
+            </td>
+            <td>
+              <%= link_to "詳細へ", matchmake_path(favorite.matchmake_id),class: "nav-link" %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <%= paginate @matchmake_favorites, class: "paginate" %>
+  </div>
+</div>

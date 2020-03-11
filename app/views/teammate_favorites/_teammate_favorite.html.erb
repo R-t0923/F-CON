@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-10 offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>投稿タイトル</th>
+          <th>カテゴリー</th>
+          <th>チームレベル</th>
+          <th>投稿日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <% teammate_favorites.each do |favorite| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= attachment_image_tag favorite.teammate_recruitment.group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+            </td>
+            <td>
+              <%= favorite.teammate_recruitment.title %>
+            </td>
+            <td>
+              <%= favorite.teammate_recruitment.group.category %>
+            </td>
+            <td>
+              <%= favorite.teammate_recruitment.level %>
+            </td>
+            <td>
+              <%= favorite.teammate_recruitment.created_at.strftime("%Y年%m月%d日") %>
+            </td>
+            <td>
+              <%= link_to "詳細へ", teammate_recruitment_path(favorite.teammate_recruitment_id) ,class: "nav-link"%>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <%= paginate @teammate_favorites, class: "paginate" %>
+  </div>
+</div>

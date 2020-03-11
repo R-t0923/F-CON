@@ -1,0 +1,137 @@
+<p id="notice"><%= notice %></p>
+<h2 class="mt-5">メンバー募集 詳細</h2>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td class="image">
+          <%= attachment_image_tag @teammate_recruitment.group, :group_image, format: 'jpeg', fallback: "no_image2.jpg"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>チーム名：</strong>
+          <%= link_to group_path(@teammate_recruitment.group.id),class: "link" do %>
+            <%= @teammate_recruitment.group.name %>
+          <% end %>
+        </td>
+      </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+        <% if end_user_signed_in?%>
+        <%# group_idとgroup.idが一緒のユーザーであれば表示 %>
+        <% if @teammate_recruitment.group.end_user_id == current_end_user.id %>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "投稿を削除する", group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            </td>
+          </tr>
+        <%# ログインユーザーがAdminなら以下の情報が表示 %>
+        <% elsif current_end_user.admin == true %>
+          <tr>
+            <td>
+              <%= link_to "投稿を削除する", group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            </td>
+          </tr>
+        <% else current_end_user.admin == false%>
+        <% end %>
+        <%# ここまで %>
+        <tr>
+          <td>
+          <%# コメント機能 %>
+            <%# remote: trueでjsのリクエストを送信する %>
+            <%= form_for [@teammate_recruitment, @comment] ,remote: true do |f| %>
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
+              <div class="text-right">
+                <%= f.submit "送信する", class: "btn btn-sm btn-outline-primary " %>
+              </div>
+            <% end %>
+          <%# コメント機能　ここまで %>
+          </td>
+        <tr>
+      <% end %>
+      <%# ログインしていないユーザーはここまで表示しない %>
+    </table>
+  </div>
+  <div class="col-6">
+  <div>
+    投稿日： <%= @teammate_recruitment.created_at.strftime("%Y年%m月%d日") %>
+    <%# ログインしてないユーザーの場合表示しない %>
+    <%# いいね機能 %>
+    <span id="favorites_buttons_<%= @teammate_recruitment.id %>">
+      <%= render partial: 'teammate_favorites/favorites_button', locals: {teammate_recruitment: @teammate_recruitment} %>
+    </span>
+  </div>
+  <%# ログインしていないユーザーはここまで表示しない %>
+  <h4><%= @teammate_recruitment.title%></h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>募集メンバー</th>
+        <td><%= @teammate_recruitment.level %></td>
+      </tr>
+      <tr>
+        <th>カテゴリー</th>
+        <td><%= @teammate_recruitment.group.category %></td>
+      </tr>
+      <tr>
+        <th>チームレベル</th>
+        <td><%= @teammate_recruitment.group.level %></td>
+      </tr>
+      <tr>
+        <th>男女比</th>
+        <td>
+          男性<%= @teammate_recruitment.group.male_member %>人 :
+          女性<%= @teammate_recruitment.group.female_member %>人
+        </td>
+      </tr>
+      <tr>
+        <th>活動地域</th>
+        <td><%= @teammate_recruitment.group.city %></td>
+      </tr>
+      <tr>
+        <th>活動日</th>
+        <td><%= @teammate_recruitment.schedule %></td>
+      </tr>
+      <tr>
+        <th>参加費</th>
+        <td><%= @teammate_recruitment.money %></td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>募集内容</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@teammate_recruitment.introduction) %></td>    </table>
+  </div>
+</div>
+<div >
+<% if end_user_signed_in?%>
+  <div class="row">
+    <h2>コメント一覧</h2>
+    <div class ="col-10 offset-1">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>コメント</th>
+            <th>投稿日</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="comment_<%= @teammate_recruitment.id %>">
+          <%= render 'teammate_comments/comment', comments: @comments %>
+        </tbody>
+      </table>
+      <%= paginate @comments, class: "paginate" %>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+
+						

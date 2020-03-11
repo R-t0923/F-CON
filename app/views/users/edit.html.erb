@@ -1,0 +1,64 @@
+<h2 class="mt-5 mb-4">登録情報編集</h2>
+
+<%= form_for @user, url: user_path do |f| %>
+<%= render 'layouts/error_messages', record: @user %>
+  <div class="row">
+    <div class="col-3 offset-1">
+      <%= attachment_image_tag @user, :user_image, size: "200x200", fallback: "no_image.jpg"%>
+      <%= f.attachment_field :user_image, placeholder: "画像選択" %>
+    </div>
+    <div class="col-7">
+      <table class="table">
+        <tr>
+          <th>ニックネーム</th>
+          <td><%= f.text_field :nick_name, placeholder:"FCON太郎(10文字以内)",size: 30%></td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+            <td>
+              <%= f.telephone_field :phone_number, placeholder: "090-1234-5678(ハイフン)", size: 30%>
+            </td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+            <td>
+              <%= f.email_field :email, placeholder: "fcon@fmail.com", size: 30%>
+            </td>
+        </tr>
+        <tr>
+          <th>性別</th>
+            <td>
+              <%= f.select :gender, EndUser.genders.keys.to_a, {}  %>
+            </td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+            <td>
+              <%= f.select :age, EndUser.ages.keys.to_a, {} %>
+            </td>
+        </tr>
+        <tr>
+          <th>フットサル経験</th>
+            <td>
+              <%= f.number_field :fotsal_experience, min: 0 ,max:99%>年
+            </td>
+        </tr>
+        <tr>
+          <th>サッカー経験</th>
+            <td>
+              <%= f.number_field :soccer_experience,min: 0 ,max:99 %>年
+            </td>
+        </tr>
+        <tr>
+          <th>自己紹介etc</th>
+          <td>
+            <%= f.text_area :introduction, placeholder:"こんにちは！！(任意）",size: "30*30" %>
+          </td>
+        </tr>
+      </table>
+      <div class="actions text-center">
+        <%= f.submit "　　登 録 す る　　" ,class:"btn btn-outline-primary btn-sm " %>
+      </div>
+    </div>
+  </div>
+<% end %>

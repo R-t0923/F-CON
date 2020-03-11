@@ -1,0 +1,35 @@
+<h2 class="mt-5">メンバー募集投稿一覧</h2>
+<div class="row">
+  <div class="col-8 offset-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿タイトル</th>
+          <th>投稿日</th>
+          <th></th>
+          <th><th>
+        </tr>
+      </thead>
+      <% teammate_recruitments.each do |teammate_recruitment| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= teammate_recruitment.title %>
+            </td>
+            <td ><%= teammate_recruitment.created_at.strftime("%Y年%m月%d日") %></td>
+            <td >
+              <%= link_to "詳細へ", teammate_recruitment_path(teammate_recruitment.id),class: "nav-link" %>
+            </td>
+            <%# 現在のログインユーザーがグループ作成者であれば以下を表示 %>
+            <% if teammate_recruitment.group.end_user_id == current_end_user.id %>
+              <td>
+                <%= link_to "投稿を削除する", group_teammate_recruitment_path(teammate_recruitment.group,teammate_recruitment), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm " %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <%= paginate teammate_recruitments, class: "paginate" %>
+  </div>
+</div>

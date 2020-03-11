@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+<% if @user == current_end_user %>
+  <h2 class="mt-5">マイページ</h2>
+<% else  %>
+  <h2 class="mt-5"><%= @user.nick_name%>さんのページ</h2>
+<% end %>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td class="image">
+        <%= attachment_image_tag @user, :user_image, format: 'jpeg', fallback: "no_image.jpg" %>
+        </td>
+      </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
+      <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
+        <% if @user == current_end_user %>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_user_path(@user) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <%= link_to "退会する", user_path, method: :delete, "data-confirm" => "本当に退会しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            <td>
+          </tr>
+          <tr>
+            <td><%= link_to "チームを作成する", new_group_path ,class: "btn btn-outline-success btn-sm btn-block"%></td><br>
+          </tr>
+        <%# ログインユーザーがAdminなら以下の情報が表示 %>
+        <% elsif current_end_user.admin == true %>
+          <tr>
+            <td>
+              <%= link_to "削除する", user_path, method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            <td>
+          </tr>
+        <% else current_end_user.admin == false%>
+        <% end %>
+      <% end %>
+      <%# ここまで %>
+    </table>
+  </div>
+  <div class="col-6">
+    <table class="user_table table table-bordered">
+      <tr>
+        <th>ニックネーム</th>
+        <td><%= @user.nick_name %></td>
+      </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
+      <%# ログインユーザーと@userが一緒なら以下の情報が表示 %>
+        <% if @user == current_end_user || current_end_user.admin? %>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @user.phone_number %></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <%# ここまで %>
+      <tr>
+        <th>性別</th>
+        <td><%= @user.gender %></td>
+      </tr>
+      <tr>
+        <th>年齢</th>
+        <td><%= @user.age %></td>
+      </tr>
+      <tr>
+        <th>フットサル経験</th>
+        <td><%= @user.fotsal_experience %>年</td>
+      </tr>
+      <tr>
+        <th>サッカー経験</th>
+        <td><%= @user.soccer_experience %>年</td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>自己紹介</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@user.introduction) %></td>
+    </table>
+      
+  </div>
+</div>
+

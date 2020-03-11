@@ -1,0 +1,135 @@
+<p id="notice"><%= notice %></p>
+<h2 class="mt-5">マッチメイク募集 詳細</h2>
+<div class="row">
+  <div class="col-4 offset-1">
+    <table class="table table-borderless">
+      <tr>
+        <td class="image">
+          <%= attachment_image_tag @matchmake.group, :group_image, format: 'jpeg', fallback: "no_image2.jpg"%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>チーム名：</strong>
+          <%= link_to group_path(@matchmake.group.id),class: "link" do %>
+            <%= @matchmake.group.name %>
+          <% end %>
+        </td>
+      </tr>
+      <%# ログインしてないユーザーの場合表示しない %>
+      <% if end_user_signed_in?%>
+        <%# group_idとgroup.idが一緒のユーザーであれば表示 %>
+        <% if @matchmake.group.end_user_id == current_end_user.id %>
+          <tr>
+            <td>
+              <%= link_to "編集する",edit_group_matchmake_path(@matchmake.group,@matchmake) ,class: "btn btn-outline-secondary btn-sm btn-block" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+            </td>
+          </tr>
+          <%# ログインユーザーがAdminなら以下の情報が表示 %>
+          <% elsif current_end_user.admin == true %>
+            <tr>
+              <td>
+                <%= link_to "投稿を削除する", group_matchmake_path(@matchmake.group,@matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm btn-block" %>
+              </td>
+          </tr>
+          <% else current_end_user.admin == false%>
+        <% end %>
+        <%# ここまで %>
+        <tr>
+          <td>
+          <%# コメント機能 %>
+            <%# remote: trueでjsのリクエストを送信する %>
+            <%= form_for [@matchmake, @comment], remote: true do |f| %>
+              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
+              <div class="text-right">
+                <%= f.submit "送信する", class: "btn btn-sm btn-outline-primary " %>
+              </div>
+            <% end %>
+          <%# コメント機能　ここまで %>
+          </td>
+        <tr>
+      <% end %>
+      <%# ログインしていないユーザーはここまで表示しない %>
+    </table>
+  </div>
+  <div class="col-6">
+  <div>
+    投稿日： <%= @matchmake.created_at.strftime("%Y年%m月%d日") %>
+  <%# ログインしてないユーザーの場合表示しない %>
+    <%# いいね機能 %>
+    <span id="favorites_buttons_<%= @matchmake.id %>">
+      <%= render partial: 'matchmake_favorites/favorites_button', locals: {matchmake: @matchmake} %>
+    </span>
+  </div>
+    <%# いいね機能ここまで %>
+  <%# ログインしていないユーザーはここまで表示しない %>
+  <h4><%= @matchmake.title%></h4>
+    <table class="table table-bordered">
+      <tr>
+        <th>募集日程</th>
+        <td>
+          <%= @matchmake.day.strftime("%Y年%m月%d日") %> 
+          <%= @matchmake.time.strftime("%H時%M分〜") %>
+        </td>
+      </tr>
+      <tr>
+        <th>募集メンバー</th>
+        <td><%= @matchmake.level %></td>
+      </tr>
+      <tr>
+        <th>募集カテゴリー</th>
+        <td><%= @matchmake.category %></td>
+      </tr>
+      <tr>
+        <th>募集数</th>
+        <td><%= @matchmake.capacity %>チーム</td>
+      </tr>
+      
+      <tr>
+        <th>開催場所</th>
+        <td><%= @matchmake.place %></td>
+      </tr>
+      
+      <tr>
+        <th>参加費</th>
+        <td><%= @matchmake.money %></td>
+      </tr>
+    </table>
+    <table class="table table-bordered">
+      <tr><strong>募集内容</strong></tr>
+      <%# 入力された段落通りに表示 %>
+      <td><%= simple_format(@matchmake.introduction) %></td>    </table>
+  </div>
+</div>
+
+<% if end_user_signed_in?%>
+  <div class="row">
+    <h2>コメント一覧</h2>
+    <div class ="col-10 offset-1">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>投稿者</th>
+            <th>コメント</th>
+            <th>投稿日</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="comment_<%= @matchmake.id %>">
+          <%= render 'matchmake_comments/comment', comments: @comments %>
+        </tbody>
+      </table>
+      <%= paginate @comments, class: "paginate" %>
+    </div>
+  </div>
+<% end %>
+
+
+
+
+						

@@ -1,0 +1,6 @@
+<h2 class="mt-5 mb-4">メンバー募集の編集</h2>
+<%= form_for @teammate_recruitment, url:group_teammate_recruitment_path(@teammate_recruitment.group,@teammate_recruitment) do |f| %>
+  <%= render 'layouts/error_messages', record: @teammate_recruitment %>
+  <%= render "teammate_form", f: f %>
+<% end %>
+

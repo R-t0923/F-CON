@@ -1,0 +1,35 @@
+<h2 class="mt-5">マッチメイク投稿一覧</h2>
+<div class="row">
+  <div class="col-8 offset-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>投稿タイトル</th>
+          <th>投稿日</th>
+          <th></th>
+          <th><th>
+        </tr>
+      </thead>
+      <% matchmakes.each do |matchmake| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= matchmake.title %>
+            </td>
+            <td ><%= matchmake.created_at.strftime("%Y年%m月%d日") %></td>
+            <td >
+              <%= link_to "詳細へ", matchmake_path(matchmake.id),class: "nav-link" %>
+            </td>
+            <%# 現在のログインユーザーがグループ作成者であれば以下を表示 %>
+            <% if matchmake.group.end_user_id == current_end_user.id %>
+              <td>
+                <%= link_to "投稿を削除する", group_matchmake_path(matchmake.group,matchmake), method: :delete, "data-confirm" => "本当に消しますか？",class:"btn btn-outline-danger btn-sm " %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <%= paginate matchmakes, class: "paginate" %>
+  </div>
+</div>

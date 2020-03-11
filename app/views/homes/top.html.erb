@@ -1,0 +1,22 @@
+<%= image_tag 'background_image2.jpg', class: 'background_image' %>
+<p><h3 class="text-center">＜＜新着メンバー募集＞＞</h3></p>
+<div class ="row">
+<%# 新規投稿４つを表示 %>
+  <% @teammate_recruitments.first(4).each do |teammate_recruitment|%>
+    <%=render "teammate_recruitments/teammate_recruitment_index", teammate_recruitment: teammate_recruitment%>
+  <% end %>
+</div>
+<div class="row">
+  <%= link_to "一覧ページへ", teammate_recruitments_path ,class: "btn-sm btn-primary mx-auto d-block"%>
+</div>
+<p><h3 class="text-center">＜＜新着マッチメイク募集＞＞</h3></p>
+<div class ="row">
+<%# 新規投稿４つを表示 %>
+  <% @matchmakes.first(4).each do |matchmake|%>
+    <%=render "matchmakes/matchmake_index", matchmake: matchmake%>
+  <% end %>
+</div>
+<div class="row">
+    <%= link_to "一覧ページへ", matchmakes_path ,class: "home-btn btn-sm btn-primary mx-auto d-block"%>
+</div>
+

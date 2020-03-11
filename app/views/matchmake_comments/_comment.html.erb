@@ -1,0 +1,21 @@
+<% comments.each do |comment| %>
+  <tr>
+    <td width="160">
+      <%= link_to user_path(comment.end_user_id),class: "link" do %>
+        <%= attachment_image_tag comment.end_user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image2.jpg"%>
+        <%= comment.end_user.nick_name %>
+      <% end %>
+    </td>
+    <td width="250">
+      <%= simple_format(comment.comment) %>
+    </td>
+    <td width="160">
+      <%= comment.created_at.strftime("%Y年%m月%d日") %>
+      </td>
+    <td width="135">
+      <% if comment.end_user == current_end_user %>
+        <%= link_to "コメントを消す", matchmake_matchmake_comment_path(comment.matchmake_id,comment.id), method: :delete,remote: true , class:"btn-sm btn-outline-danger" %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

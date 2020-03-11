@@ -1,0 +1,123 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "./bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+li {
+  list-style: none;
+} 
+
+header {
+  width: 100%;
+  height: 100px;
+}
+
+.drawer {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #EEEEEE	;
+}
+
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+
+footer {
+  text-align: center;
+  padding: 26px 0;
+}
+
+footer p {
+  font-size : 0.875rem;
+}
+
+.background_image {
+  margin-right: -165px;
+  margin-left: -165px;
+  height: 350px;
+  width: 1440px;
+  
+}
+
+.logo_image {
+ width:100px;
+ height:100%;
+}
+
+
+.text-center {
+  margin-top: 35px;
+}
+
+.home-btn {
+  margin-bottom: 50px;
+}
+
+.about_section {
+  margin: 25px;
+}
+
+.about {
+  padding-left:20px;
+  border-radius: 20px;
+  background-color:#343a40; 
+  color:#fff;
+}
+
+header_link:link {color:white; text-decoration:none}
+header_link:visited {color:white; text-decoration:none}
+header_link.hover {color:white; text-decoration:none}
+header_link:active {color:white; text-decoration:none}
+
+.user_table {
+  margin-top: 18px;
+} 
+
+.group_table {
+  margin-top: 11px;
+}
+
+.image {
+  text-align: center;
+  width: 100%;
+}
+
+
+a.nav-link:link { color: #AAAAAA; }
+a.nav-link:visited { color: #888888; }
+a.nav-link:hover { color: #555555	; }
+a.nav-link:active { color: #222222; }
+
+a.link:link { color: #AAAAAA; }
+a.link:visited { color: #888888; }
+a.link:hover { color: #555555	; }
+a.link:active { color: #222222; }
+
+.actions.text-center {
+  margin-top: -10px;
+}
