@@ -5,7 +5,7 @@
     <table class="table table-borderless">
       <tr>
         <td class="image">
-          <%= attachment_image_tag @teammate_recruitment.group, :group_image, format: 'jpeg', fallback: "no_image2.jpg"%>
+          <%= attachment_image_tag @teammate_recruitment.group, :group_image, :fill, 300, 300, format: 'jpeg', fallback: "no_image2.jpg"%>
         </td>
       </tr>
       <tr>
@@ -40,22 +40,20 @@
         <% else current_end_user.admin == false%>
         <% end %>
         <%# ここまで %>
-        <tr>
-          <td>
-          <%# コメント機能 %>
-            <%# remote: trueでjsのリクエストを送信する %>
-            <%= form_for [@teammate_recruitment, @comment] ,remote: true do |f| %>
-              <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
-              <div class="text-right">
-                <%= f.submit "送信する", class: "btn btn-sm btn-outline-primary " %>
-              </div>
-            <% end %>
-          <%# コメント機能　ここまで %>
-          </td>
-        <tr>
       <% end %>
       <%# ログインしていないユーザーはここまで表示しない %>
     </table>
+    <% if end_user_signed_in?%>
+    <%# コメント機能 %>
+      <%# remote: trueでjsのリクエストを送信する %>
+      <%= form_for [@teammate_recruitment, @comment] ,remote: true do |f| %>
+        <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %><br>
+        <div class="text-right">
+          <%= f.submit "送信する", class: "btn btn-sm btn-outline-primary " %>
+        </div>
+      <% end %>
+    <%# コメント機能　ここまで %>
+    <% end %>
   </div>
   <div class="col-6">
   <div>
