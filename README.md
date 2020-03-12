@@ -1,24 +1,25 @@
-# README
+# F/CON  
+東京23区限定のフットサルのマッチングアプリです。  
+本アプリでは、ユーザー登録した誰もがチームの作成や参加、チーム作成後は新メンバー、マッチメイク（対戦相手）の募集の投稿ができます。  
+投稿は一覧から確認し、カテゴリーやレベル別に検索をする事によって、自分にあったチームやマッチメイクを探す事ができます。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Dependency  
+ruby 2.5.7 Rails 5.2.4.1
 
-Things you may want to cover:
+# Usage
+ユーザー機能  
+チームの作成、チームの参加をする事ができ,チームの作成はマイページから、チームの参加はチームの詳細ページから行うことができます。  
+また、投稿に対しては、お気に入り機能、コメントをする事ができるので、気になった投稿があればコメントによるマッチングができます。  
+投稿はメンバー募集、マッチメイク募集一覧とそれぞれ分かれていて、チーム名やレベル、カテゴリーを絞り込んで検索をする事ができるので,自分にあったチームやマッチメイク募集を探すことができます。  
+マイページ、マイチーム一覧（作成チーム、参加チーム）、お気に入り一覧を画面左上のドローワーメニューから確認することができます。
 
-* Ruby version
+チーム作成ユーザーの機能
+チーム作成後は、チーム詳細から新メンバー、マッチメイクの募集を投稿することができます。  
+チーム詳細からは、チームの投稿一覧を履歴として確認することもできます。
 
-* System dependencies
+管理者機能
+管理者はユーザーと基本的な機能は変わりません。  
+ただ、全てのユーザー、チーム、投稿の削除権限があります。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Author  
+@R-t0923
