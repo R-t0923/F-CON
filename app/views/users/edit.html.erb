@@ -4,7 +4,7 @@
 <%= render 'layouts/error_messages', record: @user %>
   <div class="row">
     <div class="col-3 offset-1">
-      <%= attachment_image_tag @user, :user_image, :fill, 250, 250, format: 'jpeg', fallback: "no_image.jpg"%>
+      <%= attachment_image_tag @user, :user_image, :fill, 250, 250, format: 'jpeg', fallback: "no_image.jpg", size: "250x250"%>
       <%= f.attachment_field :user_image, placeholder: "画像選択" %>
     </div>
     <div class="col-7">
