@@ -2,7 +2,7 @@
       <table class="table table-bordered">
         <tr>
           <td width="125">
-            <%= attachment_image_tag matchmake.group, :group_image, size: "125x125", format: 'jpeg', fallback: "no_image2.jpg"%>
+            <%= attachment_image_tag matchmake.group, :group_image, :fill, 125, 125, format: 'jpeg', fallback: "no_image2.jpg", size: "125x125"%>
           </td>
           
           <td>

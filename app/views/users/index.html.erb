@@ -42,7 +42,7 @@
             <tbody>
               <tr>
                 <td>
-                  <%= attachment_image_tag user, :user_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+                  <%= attachment_image_tag user, :user_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" , size: "50x50"%>
                 </td>
                 <td><%= user.nick_name%></td>
                 <td><%= user.age%></td>
