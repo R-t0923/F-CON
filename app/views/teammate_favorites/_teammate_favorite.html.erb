@@ -15,7 +15,7 @@
         <tbody>
           <tr>
             <td>
-              <%= attachment_image_tag favorite.teammate_recruitment.group, :group_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg"%>
+              <%= attachment_image_tag favorite.teammate_recruitment.group, :group_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg", size: "50x50"%>
             </td>
             <td>
               <%= favorite.teammate_recruitment.title %>
