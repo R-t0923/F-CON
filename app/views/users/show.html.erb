@@ -9,7 +9,7 @@
     <table class="table table-borderless">
       <tr>
         <td class="image">
-        <%= attachment_image_tag @user, :user_image, format: 'jpeg', fallback: "no_image.jpg" %>
+        <%= attachment_image_tag @user, :user_image, :fill, 250, 250, format: 'jpeg', fallback: "no_image.jpg", size: "250x250" %>
         </td>
       </tr>
       <%# ログインしてないユーザーの場合表示しない %>

@@ -2,7 +2,7 @@
 lock "~> 3.12.0"
 
 set :application, "F-CON"
-set :repo_url, "https://github.com/R-t0923/F-CON.git"
+set :repo_url, "git@github.com:R-t0923/F-CON.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
